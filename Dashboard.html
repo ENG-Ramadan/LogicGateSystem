@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logic Circuits Dashboard</title>
+<link rel="stylesheet" href="Dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Logic Circuits</h2>
+
+<button class="main-btn" onclick="setActive(this);showHome()">Dashboard</button>
+
+<!-- COMBINATIONAL -->
+<button class="main-btn" onclick="toggle('comb')">Combinational ▾</button>
+
+<div class="submenu" id="comb">
+
+  <!-- ELEMENT -->
+  <button onclick="toggle('combE')">Element ▾</button>
+  <div class="submenu" id="combE">
+
+    <button class="sim-btn" onclick="openSimulation('comb')">Simulation</button>
+
+    <button onclick="setActive(this);openGate('AND')">AND</button>
+    <button onclick="setActive(this);openGate('OR')">OR</button>
+    <button onclick="setActive(this);openGate('NOT')">NOT</button>
+    <button onclick="setActive(this);openGate('NAND')">NAND</button>
+    <button onclick="setActive(this);openGate('NOR')">NOR</button>
+    <button onclick="setActive(this);openGate('XOR')">XOR</button>
+    <button onclick="setActive(this);openGate('XNOR')">XNOR</button>
+  </div>
+
+  <!-- MODEL -->
+  <button onclick="toggle('combM')">Model ▾</button>
+  <div class="submenu" id="combM">
+
+   
+
+    <button onclick="setActive(this);openModel('Half Adder')">Half Adder</button>
+    <button onclick="setActive(this);openModel('Full Adder')">Full Adder</button>
+    <button onclick="setActive(this);openModel('MUX')">MUX</button>
+  </div>
+
+</div>
+
+<!-- SEQUENTIAL -->
+<button class="main-btn" onclick="toggle('seq')">Sequential ▾</button>
+
+<div class="submenu" id="seq">
+
+  <!-- ELEMENT -->
+  <button onclick="toggle('seqE')">Element ▾</button>
+  <div class="submenu" id="seqE">
+
+    
+
+    <button onclick="setActive(this);openSeq('SR FF')">SR FF</button>
+    <button onclick="setActive(this);openSeq('JK FF')">JK FF</button>
+    <button onclick="setActive(this);openSeq('D FF')">D FF</button>
+  </div>
+
+  <!-- MODEL -->
+  <button onclick="toggle('seqM')">Model ▾</button>
+  <div class="submenu" id="seqM">
+
+   
+
+    <button onclick="setActive(this);openSeqModel('Counter')">Counter</button>
+    <button onclick="setActive(this);openSeqModel('Register')">Register</button>
+  </div>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="topbar">
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <h3>Dashboard</h3>
+</div>
+
+<div class="box" id="content">
+Welcome 🚀
+</div>
+
+</div>
+
+<script src="Dashboard.js"></script>
+
+</body>
+</html>
