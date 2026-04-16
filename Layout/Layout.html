@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script type="module"
+            src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Layout.css">
+        <title>Layout</title>
+    </head>
+    <body>
+
+        <!-- Header -->
+
+        <div class="layout">
+            <header class="topbar">
+                <div class="logo">Logic Gate System</div>
+                <nav class="menu">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="../index.html">Simulation</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- Sidebar -->
+
+            <aside class="sidebar">
+                <h2>Navigation</h2>
+                <details class="dropdown">
+                    <summary>Combinational</summary>
+                    <ul>
+                        <li>
+                            <details class="dropdown">
+                                <summary>Elements</summary>
+                                <ul>
+                                    <li><a href="#">Simulation</a></li>
+                                    <li><a href="#">AND Gate</a></li>
+                                    <li><a href="#">NAND Gate</a></li>
+                                    <li><a href="#">OR Gate</a></li>
+                                    <li><a href="#">NOR Gate</a></li>
+                                    <li><a href="#">XOR Gate</a></li>
+                                    <li><a href="#">NOT Gate</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details class="dropdown">
+                                <summary>Module</summary>
+                                <ul>
+                                    <li><a href="#">Multiplexer (MUX)</a></li>
+                                    <li><a href="#">Demultiplexer
+                                            (DEMUX)</a></li>
+                                    <li><a href="#">Decoder</a></li>
+                                    <li><a href="#">Encoder</a></li>
+                                    <li><a href="#">Adder</a></li>
+
+                                </ul>
+                            </details>
+                        </li>
+
+                    </ul>
+                </details>
+                <details class="dropdown">
+                    <summary>Sequential</summary>
+                    <ul>
+                        <li>
+                            <details class="dropdown">
+                                <summary>Elements</summary>
+                                <ul>
+                                    <li><a href="#">D Flip-Flop</a></li>
+                                    <li><a href="#">JK Flip-Flop</a></li>
+                                    <li><a href="#">T flip-flop</a></li>
+                                    <li><a href="#">Latch</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details class="dropdown">
+                                <summary>Module</summary>
+                                <ul>
+                                    <li><a href="#">Registers</a></li>
+                                    <li><a href="#">Shift Registers</a></li>
+                                    <li><a href="#">Counters</a></li>
+                                    <li><a href="#">Memory Units</a></li>
+                                </ul>
+                            </details>
+                        </li>
+
+                    </ul>
+                </details>
+            </aside>
+
+            <!-- Main  -->
+
+            <main class="main">
+                <section class="hero">
+                    <h1>Name of This Content</h1>
+                    <p>Select an item from the sidebar to view its details.</p>
+                </section>
+                <section class="details-grid">
+                    <article class="card full-width truthTable">
+                        <h3>Truth Table</h3>
+                        <p>View input/output combinations and gate behavior at a
+                            glance.</p>
+                    </article>
+                    <article class="card pinConfig">
+                        <h3>Pin Configuration</h3>
+                        <p>Inspect signal mapping, pin labels, and connectivity
+                            details.</p>
+                    </article>
+                    <article class="card timingDiagram">
+                        <h3>Timing Diagram</h3>
+                        <p>Analyze transition timing and propagation delays for
+                            the gate.</p>
+                    </article>
+                    <article class="card internalArch">
+                        <h3>Internal Architecture</h3>
+                        <p>Explore the gate's internal structure and logic
+                            implementation.</p>
+                    </article>
+                    <article class="card function">
+                        <h3>Function</h3>
+                        <p>Read the gate's boolean expression, truth table
+                            summary, and use case.</p>
+                    </article>
+                </section>
+
+<!-- Model Viewer -->
+
+                <div id="model-viewer-container"><h3>Model Will Appear Here</h3></div>
+            </main>
+
+<!-- Footer -->
+
+            <footer class="footer">
+                <p>&copy; 2026 Your Company. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <script src="Layout.js"></script>
+    </body>
+</html>

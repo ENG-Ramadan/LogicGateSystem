@@ -9,7 +9,7 @@
     <body>
         <main class="app-shell">
             <header class="app-header">
-                <h1>Professional Logic Gate System</h1>
+                <h1>Simulation Logic Gate </h1>
                 <p>Interactive simulator with live output, truth table, and gate
                     details.</p>
             </header>
@@ -17,16 +17,15 @@
             <section class="card controls-card">
                 <h2>Inputs</h2>
                 <div class="inputs" aria-label="Input toggles">
-                    <button type="button" id="btnA" class="input-btn"
-                        aria-pressed="false">A: OFF</button>
-                    <button type="button" id="btnB" class="input-btn"
-                        aria-pressed="false">B: OFF</button>
+                    <button type="button" id="btnA" class="input-btn">Input-1:
+                        OFF</button>
+                    <button type="button" id="btnB" class="input-btn">Input-2:
+                        OFF</button>
                 </div>
 
                 <div class="gate-selector">
                     <p>Select gate:</p>
-                    <div id="gateButtons" class="gate-buttons"
-                        aria-label="Gate options">
+                    <div id="gateButtons" class="gate-buttons">
                         <button type="button" class="gate-btn"
                             data-gate="AND">AND</button>
                         <button type="button" class="gate-btn"
@@ -52,18 +51,18 @@
                 <h2>Output</h2>
                 <p id="gateInfo" class="gate-info">Choose a gate and set inputs
                     to view evaluation.</p>
-                <div class="gate-figure" id="gateDiagram" aria-live="polite"
-                    aria-atomic="true"></div>
-                <div class="output" id="output" role="status"
-                    aria-live="polite">OUTPUT: 0</div>
+                <div class="gate-figure" id="gateDiagram">
+                    <img id="gateDiagramImg" src alt="Gate diagram"
+                        class="gate-diagram-img">
+                </div>
+                <div class="output" id="output">OUTPUT: 0</div>
             </section>
 
             <section class="card table-card">
                 <h2>Truth Table</h2>
-                <table id="truthTable"
-                    aria-label="Truth table for selected gate">
+                <table id="truthTable" class="truth-table">
                     <thead>
-                        <tr><th>A</th><th>B</th><th>Result</th></tr>
+                        <tr><th>Input-1</th><th>Input-2</th><th>Output</th></tr>
                     </thead>
                     <tbody></tbody>
                 </table>

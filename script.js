@@ -2,15 +2,15 @@ const state = { A: 0, B: 0 };
 const gateInfo = {
   AND: "True when both A and B are 1.",
   OR: "True when either A or B is 1.",
-  NOT: "Inverts A; B is ignored.",
+  NOT: "Inverts A.",
   NAND: "Inverse of AND.",
   NOR: "Inverse of OR.",
   XOR: "True only when A and B differ."
 };
-
 const outputEl = document.getElementById("output");
 const gateInfoEl = document.getElementById("gateInfo");
 const gateDiagramEl = document.getElementById("gateDiagram");
+const gateDiagramImg = document.getElementById("gateDiagramImg");
 const truthTableBody = document.querySelector("#truthTable tbody");
 const gateButtons = document.querySelectorAll(".gate-btn");
 const btnA = document.getElementById("btnA");
@@ -18,14 +18,7 @@ const btnB = document.getElementById("btnB");
 const resetBtn = document.getElementById("resetBtn");
 let currentGate = "AND";
 
-const gateDiagrams = {
-  AND: "A ●───● B|       ├── OUTPUT|A & B",
-  OR: "A ●──┬─● B|     ├── OUTPUT|A ∨ B",
-  NOT: "A ●──►⊖── OUTPUT|¬A",
-  NAND: "A ●───● B|       ├─⊙── OUTPUT|¬(A ∧ B)",
-  NOR: "A ●──┬─● B|      ├─⊙── OUTPUT|¬(A ∨ B)",
-  XOR: "A ●───┬─● B|      ├── OUTPUT|A ⊕ B"
-};
+
 
 function evaluateGate(gate, a, b) {
   switch (gate) {
@@ -87,8 +80,9 @@ function setActiveGateButton(gate) {
 }
 
 function updateGateDiagram(gate) {
-  const diagramText = gateDiagrams[gate] || "";
-  gateDiagramEl.textContent = diagramText;
+  const imagePath = `images/${gate.toLowerCase()}.png`;
+  gateDiagramImg.src = imagePath;
+  gateDiagramImg.alt = `${gate} gate diagram`;
 }
 
 function setSelectedGate(gate) {
@@ -109,7 +103,6 @@ function calculate() {
   outputEl.classList.toggle("active", true);
 
   gateInfoEl.textContent = `${gate}: ${gateInfo[gate] || "Select valid gate."}`;
-
   refreshTruthTable();
 }
 
@@ -137,3 +130,4 @@ gateButtons.forEach((button) => {
 updateToggleButton(btnA, "A");
 updateToggleButton(btnB, "B");
 setSelectedGate(currentGate);
+
