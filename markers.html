@@ -1,91 +1,132 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_markers_title">علامات الواقع المعزز — LogicAR</title>
-  <meta name="description" content="اطبع علامات الواقع المعزز لاستخدامها مع تطبيق LogicAR">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <a href="#markersGrid" class="skip-link">Skip to content</a>
-  <div class="bg-grid"></div>
-  <div class="bg-glow bg-glow--cyan"></div>
-  <div class="bg-glow bg-glow--purple"></div>
-  <div class="bg-grain"></div>
- <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar__logo">
-      <div class="navbar__logo-icon" style="display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f0ff" /><stop offset="100%" stop-color="#8a2be2" /></linearGradient></defs><path d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z" stroke="url(#logoGrad)"></path><path d="M1 9h3" stroke="#00f0ff"></path><path d="M1 15h3" stroke="#00f0ff"></path><path d="M17 12h6" stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5" fill="#00f0ff" stroke="none"></circle></svg></div>
-      <span>Logic<span class="text-gradient">AR</span></span>
-    </div>
-   
-    <div class="navbar__links" id="navLinks">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
-      <a href="combinational.html" data-i18n="nav_combinational">دوائر توافقية</a>
-      <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-      <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
-      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
-      <a href="markers.html" class="active" data-i18n="nav_markers">العلامات</a>
-    </div>
-     <div class="navbar__lang">
-       <button class="lang-btn" data-lang="en">EN</button>
-       <button class="lang-btn" data-lang="ar">عربي</button>
-     </div>
-    <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
-  </nav>
-
-  <main class="markers-page">
-    <div class="section__header">
-      <span class="section__tag" data-i18n="markers_tag">طباعة</span>
-      <h1 class="section__title" data-i18n="markers_title">علامات الواقع المعزز</h1>
-      <p class="section__desc" data-i18n="markers_desc">اطبع هذه العلامات واستخدمها مع كاميرا هاتفك في تجربة الواقع المعزز</p>
-    </div>
-
-    <!-- Print Instructions -->
-    <div class="print-instructions no-print reveal">
-      <h3 data-i18n="print_inst_title">📋 تعليمات الطباعة</h3>
-      <ul>
-        <li data-i18n="print_inst_1">اطبع هذه الصفحة على ورق أبيض عادي (A4)</li>
-        <li data-i18n="print_inst_2">تأكد أن الطباعة بنسبة 100% بدون تصغير</li>
-        <li data-i18n="print_inst_3">قص كل علامة على حدة أو استخدمها كما هي</li>
-        <li data-i18n="print_inst_4">ضع العلامة على سطح مستوٍ ووجّه الكاميرا نحوها</li>
-        <li data-i18n="print_inst_5">حافظ على إضاءة جيدة لأفضل نتيجة</li>
-        <li data-i18n="print_inst_6">المسافة المثالية بين الكاميرا والعلامة: ١٥-٣٠ سم</li>
-      </ul>
-      <button class="btn btn--primary mt-3" onclick="window.print()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: inherit; vertical-align: middle; margin-left: 8px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg> <span data-i18n="btn_print">طباعة العلامات</span></button>
-    </div>
-
-    <!-- Markers Grid -->
-    <div class="markers-grid" id="markersGrid"></div>
-
-    <!-- Hiro marker note -->
-    <div class="container mt-4 no-print">
-      <div class="note-card">
-        <h3 class="note-card__title" data-i18n="note_title">⚠️ ملاحظة مهمة</h3>
-        <p class="note-card__text" data-i18n="note_text" id="arNoteText">
-          تستخدم تجربة الواقع المعزز نظام <strong>Barcode Markers</strong> من AR.js.<br>العلامة الأساسية المستخدمة هي العلامة رقم <strong style="color:var(--accent-cyan);">0</strong> (Barcode Value 0).<br>يمكنك أيضاً استخدام علامة <strong>Hiro</strong> المعروفة لاختبار الكاميرا.
-        </p>
-        <a href="ar.html" class="btn btn--outline mt-2" data-i18n="note_link">← جرّب الواقع المعزز الآن</a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_markers_title">علامات الواقع المعزز — LogicAR</title>
+    <meta name="description"
+      content="اطبع علامات الواقع المعزز لاستخدامها مع تطبيق LogicAR">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <a href="#markersGrid" class="skip-link">Skip to content</a>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--cyan"></div>
+    <div class="bg-glow bg-glow--purple"></div>
+    <div class="bg-grain"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon"
+          style="display:flex;align-items:center;"><svg width="28" height="28"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"><defs><lineargradient id="logoGrad" x1="0%"
+                y1="0%" x2="100%" y2="100%"><stop offset="0%"
+                  stop-color="#00f0ff" /><stop offset="100%"
+                  stop-color="#8a2be2" /></lineargradient></defs><path
+              d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z"
+              stroke="url(#logoGrad)"></path><path d="M1 9h3"
+              stroke="#00f0ff"></path><path d="M1 15h3"
+              stroke="#00f0ff"></path><path d="M17 12h6"
+              stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5"
+              fill="#00f0ff" stroke="none"></circle></svg></div>
+        <span>Logic<span class="text-gradient">AR</span></span>
       </div>
-    </div>
-  </main>
 
-  <footer class="footer no-print">
-    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
-    <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <div class="footer__links">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
-      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-    </div>
-    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
-  </footer>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="combinational.html" data-i18n="nav_combinational">دوائر
+          توافقية</a>
+        <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="markers.html" class="active"
+          data-i18n="nav_markers">العلامات</a>
+      </div>
+      <div class="navbar__lang">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="القائمة">☰</button>
+    </nav>
 
-  <script>
+    <main class="markers-page">
+      <div class="section__header">
+        <span class="section__tag" data-i18n="markers_tag">طباعة</span>
+        <h1 class="section__title" data-i18n="markers_title">علامات الواقع
+          المعزز</h1>
+        <p class="section__desc" data-i18n="markers_desc">اطبع هذه العلامات
+          واستخدمها مع كاميرا هاتفك في تجربة الواقع المعزز</p>
+      </div>
+
+      <!-- Print Instructions -->
+      <div class="print-instructions no-print reveal">
+        <h3 data-i18n="print_inst_title">📋 تعليمات الطباعة</h3>
+        <ul>
+          <li data-i18n="print_inst_1">اطبع هذه الصفحة على ورق أبيض عادي
+            (A4)</li>
+          <li data-i18n="print_inst_2">تأكد أن الطباعة بنسبة 100% بدون
+            تصغير</li>
+          <li data-i18n="print_inst_3">قص كل علامة على حدة أو استخدمها كما
+            هي</li>
+          <li data-i18n="print_inst_4">ضع العلامة على سطح مستوٍ ووجّه الكاميرا
+            نحوها</li>
+          <li data-i18n="print_inst_5">حافظ على إضاءة جيدة لأفضل نتيجة</li>
+          <li data-i18n="print_inst_6">المسافة المثالية بين الكاميرا والعلامة:
+            ١٥-٣٠ سم</li>
+        </ul>
+        <button class="btn btn--primary mt-3" onclick="window.print()"><svg
+            width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: inherit; vertical-align: middle; margin-left: 8px;"><polyline
+              points="6 9 6 2 18 2 18 9"></polyline><path
+              d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect
+              x="6" y="14" width="12" height="8"></rect></svg> <span
+            data-i18n="btn_print">طباعة العلامات</span></button>
+      </div>
+
+      <!-- Markers Grid -->
+      <div class="markers-grid" id="markersGrid"></div>
+
+      <!-- Hiro marker note -->
+      <div class="container mt-4 no-print">
+        <div class="note-card">
+          <h3 class="note-card__title" data-i18n="note_title">⚠️ ملاحظة
+            مهمة</h3>
+          <p class="note-card__text" data-i18n="note_text" id="arNoteText">
+            تستخدم تجربة الواقع المعزز نظام <strong>Barcode Markers</strong> من
+            AR.js.<br>العلامة الأساسية المستخدمة هي العلامة رقم <strong
+              style="color:var(--accent-cyan);">0</strong> (Barcode Value
+            0).<br>يمكنك أيضاً استخدام علامة <strong>Hiro</strong> المعروفة
+            لاختبار الكاميرا.
+          </p>
+          <a href="ar.html" class="btn btn--outline mt-2"
+            data-i18n="note_link">← جرّب الواقع المعزز الآن</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer no-print">
+      <div class="footer__brand">Logic<span
+          class="text-gradient">AR</span></div>
+      <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات
+        المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+      </div>
+      <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي ©
+        ٢٠٢٦</p>
+    </footer>
+
+    <script>
     // Generate AR.js 3x3 barcode markers
     const markersData = [
       { id: 0, name: 'AND', nameAr: 'بوابة "و"', nameEn: 'AND Gate', color: '#00d4ff' },
@@ -251,6 +292,6 @@
     // Listen to language changes to re-render markers
     document.documentElement.addEventListener('languageChanged', renderMarkers);
   </script>
-  <script src="js/i18n.js"></script>
-</body>
+    <script src="js/i18n.js"></script>
+  </body>
 </html>

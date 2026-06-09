@@ -1,125 +1,170 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_learn_title">تعلّم البوابات المنطقية — LogicAR</title>
-  <meta name="description" content="شرح تفصيلي لجميع البوابات المنطقية مع جداول الحقيقة وأمثلة تفاعلية">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <a href="#gatesGrid" class="skip-link">Skip to content</a>
-  <div class="bg-grid"></div>
-  <div class="bg-glow bg-glow--cyan"></div>
-  <div class="bg-glow bg-glow--purple"></div>
-  <div class="bg-grain"></div>
- <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar__logo">
-      <div class="navbar__logo-icon" style="display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f0ff" /><stop offset="100%" stop-color="#8a2be2" /></linearGradient></defs><path d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z" stroke="url(#logoGrad)"></path><path d="M1 9h3" stroke="#00f0ff"></path><path d="M1 15h3" stroke="#00f0ff"></path><path d="M17 12h6" stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5" fill="#00f0ff" stroke="none"></circle></svg></div>
-      <span>Logic<span class="text-gradient">AR</span></span>
-    </div>
-   
-    <div class="navbar__links" id="navLinks">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" class="active" data-i18n="nav_learn">تعلّم</a>
-      <a href="combinational.html" data-i18n="nav_combinational">دوائر توافقية</a>
-      <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-      <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
-      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
-      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
-    </div>
-     <div class="navbar__lang">
-       <button class="lang-btn" data-lang="en">EN</button>
-       <button class="lang-btn" data-lang="ar">عربي</button>
-     </div>
-    <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
-  </nav>
-
-  <main class="main-content">
-    <!-- Page Header -->
-    <section class="section">
-      <div class="section__header">
-        <span class="section__tag" data-i18n="learn_content_tag">المحتوى التعليمي</span>
-        <h1 class="section__title" data-i18n="learn_main_title">البوابات المنطقية الأساسية</h1>
-        <p class="section__desc" data-i18n="learn_main_desc">
-          اضغط على المفاتيح لتغيير المدخلات وشاهد كيف تتغير المخرجات في كل بوابة
-        </p>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_learn_title">تعلّم البوابات المنطقية —
+      LogicAR</title>
+    <meta name="description"
+      content="شرح تفصيلي لجميع البوابات المنطقية مع جداول الحقيقة وأمثلة تفاعلية">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <a href="#gatesGrid" class="skip-link">Skip to content</a>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--cyan"></div>
+    <div class="bg-glow bg-glow--purple"></div>
+    <div class="bg-grain"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon"
+          style="display:flex;align-items:center;"><svg width="28" height="28"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"><defs><lineargradient id="logoGrad" x1="0%"
+                y1="0%" x2="100%" y2="100%"><stop offset="0%"
+                  stop-color="#00f0ff" /><stop offset="100%"
+                  stop-color="#8a2be2" /></lineargradient></defs><path
+              d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z"
+              stroke="url(#logoGrad)"></path><path d="M1 9h3"
+              stroke="#00f0ff"></path><path d="M1 15h3"
+              stroke="#00f0ff"></path><path d="M17 12h6"
+              stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5"
+              fill="#00f0ff" stroke="none"></circle></svg></div>
+        <span>Logic<span class="text-gradient">AR</span></span>
       </div>
-    </section>
 
-    <!-- Introduction -->
-    <section class="container">
-      <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:32px; margin:0 auto;">
-        <h2 style="font-size:1.3rem; margin-bottom:12px;" data-i18n="what_is_gate_title">ما هي البوابات المنطقية؟</h2>
-        <p style="color:var(--text-secondary); line-height:2;" data-i18n="what_is_gate_desc">
-          البوابات المنطقية (Logic Gates) هي الوحدات الأساسية لبناء الدوائر الرقمية. تقوم كل بوابة بتنفيذ عملية منطقية
-          على إشارة دخل واحدة أو أكثر وتنتج إشارة خرج واحدة. الإشارات تكون إما <strong style="color:var(--accent-green);">1 (HIGH)</strong>
-          أو <strong style="color:var(--accent-red);">0 (LOW)</strong>.
-          هذه البوابات تشكّل أساس عمل جميع الأجهزة الإلكترونية من الهواتف إلى الحواسيب.
-        </p>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" class="active" data-i18n="nav_learn">تعلّم</a>
+        <a href="combinational.html" data-i18n="nav_combinational">دوائر
+          توافقية</a>
+        <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="markers.html" data-i18n="nav_markers">العلامات</a>
       </div>
-    </section>
+      <div class="navbar__lang">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="القائمة">☰</button>
+    </nav>
 
-    <!-- Gates Grid -->
-    <section class="container">
-      <div class="gates-grid" id="gatesGrid">
-        <!-- Gates will be generated by JavaScript -->
-      </div>
-    </section>
+    <main class="main-content">
+      <!-- Page Header -->
+      <section class="section">
+        <div class="section__header">
+          <span class="section__tag" data-i18n="learn_content_tag">المحتوى
+            التعليمي</span>
+          <h1 class="section__title" data-i18n="learn_main_title">البوابات
+            المنطقية الأساسية</h1>
+          <p class="section__desc" data-i18n="learn_main_desc">
+            اضغط على المفاتيح لتغيير المدخلات وشاهد كيف تتغير المخرجات في كل
+            بوابة
+          </p>
+        </div>
+      </section>
 
-    <!-- Circuits Section -->
-    <section class="section">
-      <div class="section__header reveal">
-        <span class="section__tag" data-i18n="apps_tag">تطبيقات</span>
-        <h2 class="section__title" data-i18n="apps_title">أمثلة على دوائر مركبة</h2>
-        <p class="section__desc" data-i18n="apps_desc">يمكن تركيب البوابات المنطقية معاً لبناء دوائر أكثر تعقيداً</p>
-      </div>
-      <div class="container">
-        <div class="circuits-grid">
-          <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:28px;">
-            <h3 style="font-family:var(--font-mono); color:var(--accent-cyan); margin-bottom:12px;" data-i18n="half_adder_title">نصف الجامع (Half Adder)</h3>
-            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px; line-height:1.8;" data-i18n="half_adder_desc">
-              يستخدم بوابة XOR لحساب المجموع (Sum) وبوابة AND لحساب الحمل (Carry).
-              يجمع رقمين ثنائيين (0 أو 1).
-            </p>
-            <div style="font-family:var(--font-mono); font-size:0.85rem; background:var(--bg-secondary); padding:12px; border-radius:var(--radius-sm); color:var(--accent-purple);">
-              Sum = A ⊕ B<br>
-              Carry = A · B
+      <!-- Introduction -->
+      <section class="container">
+        <div class="reveal"
+          style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:32px; margin:0 auto;">
+          <h2 style="font-size:1.3rem; margin-bottom:12px;"
+            data-i18n="what_is_gate_title">ما هي البوابات المنطقية؟</h2>
+          <p style="color:var(--text-secondary); line-height:2;"
+            data-i18n="what_is_gate_desc">
+            البوابات المنطقية (Logic Gates) هي الوحدات الأساسية لبناء الدوائر
+            الرقمية. تقوم كل بوابة بتنفيذ عملية منطقية
+            على إشارة دخل واحدة أو أكثر وتنتج إشارة خرج واحدة. الإشارات تكون إما
+            <strong style="color:var(--accent-green);">1 (HIGH)</strong>
+            أو <strong style="color:var(--accent-red);">0 (LOW)</strong>.
+            هذه البوابات تشكّل أساس عمل جميع الأجهزة الإلكترونية من الهواتف إلى
+            الحواسيب.
+          </p>
+        </div>
+      </section>
+
+      <!-- Gates Grid -->
+      <section class="container">
+        <div class="gates-grid" id="gatesGrid">
+          <!-- Gates will be generated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Circuits Section -->
+      <section class="section">
+        <div class="section__header reveal">
+          <span class="section__tag" data-i18n="apps_tag">تطبيقات</span>
+          <h2 class="section__title" data-i18n="apps_title">أمثلة على دوائر
+            مركبة</h2>
+          <p class="section__desc" data-i18n="apps_desc">يمكن تركيب البوابات
+            المنطقية معاً لبناء دوائر أكثر تعقيداً</p>
+        </div>
+        <div class="container">
+          <div class="circuits-grid">
+            <div class="reveal"
+              style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:28px;">
+              <h3
+                style="font-family:var(--font-mono); color:var(--accent-cyan); margin-bottom:12px;"
+                data-i18n="half_adder_title">نصف الجامع (Half Adder)</h3>
+              <p
+                style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px; line-height:1.8;"
+                data-i18n="half_adder_desc">
+                يستخدم بوابة XOR لحساب المجموع (Sum) وبوابة AND لحساب الحمل
+                (Carry).
+                يجمع رقمين ثنائيين (0 أو 1).
+              </p>
+              <div
+                style="font-family:var(--font-mono); font-size:0.85rem; background:var(--bg-secondary); padding:12px; border-radius:var(--radius-sm); color:var(--accent-purple);">
+                Sum = A ⊕ B<br>
+                Carry = A · B
+              </div>
             </div>
-          </div>
-          <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:28px;">
-            <h3 style="font-family:var(--font-mono); color:var(--accent-cyan); margin-bottom:12px;" data-i18n="mux_title">المُبدّل (Multiplexer)</h3>
-            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px; line-height:1.8;" data-i18n="mux_desc">
-              يختار مدخل واحد من عدة مدخلات بناءً على إشارة التحكم.
-              يُستخدم في توجيه البيانات في المعالجات.
-            </p>
-            <div style="font-family:var(--font-mono); font-size:0.85rem; background:var(--bg-secondary); padding:12px; border-radius:var(--radius-sm); color:var(--accent-purple);">
-              Y = (A · S̄) + (B · S)
+            <div class="reveal"
+              style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:28px;">
+              <h3
+                style="font-family:var(--font-mono); color:var(--accent-cyan); margin-bottom:12px;"
+                data-i18n="mux_title">المُبدّل (Multiplexer)</h3>
+              <p
+                style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px; line-height:1.8;"
+                data-i18n="mux_desc">
+                يختار مدخل واحد من عدة مدخلات بناءً على إشارة التحكم.
+                يُستخدم في توجيه البيانات في المعالجات.
+              </p>
+              <div
+                style="font-family:var(--font-mono); font-size:0.85rem; background:var(--bg-secondary); padding:12px; border-radius:var(--radius-sm); color:var(--accent-purple);">
+                Y = (A · S̄) + (B · S)
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <div class="text-center mt-4 reveal">
+        <a href="simulator.html" class="btn btn--primary btn--lg"
+          data-i18n="btn_try_sim_learn">جرّب بناء دوائرك في المحاكي &larr;</a>
       </div>
-    </section>
+    </main>
 
-    <div class="text-center mt-4 reveal">
-      <a href="simulator.html" class="btn btn--primary btn--lg" data-i18n="btn_try_sim_learn">جرّب بناء دوائرك في المحاكي &larr;</a>
-    </div>
-  </main>
+    <footer class="footer">
+      <div class="footer__brand">Logic<span
+          class="text-gradient">AR</span></div>
+      <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات
+        المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+      </div>
+      <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي ©
+        ٢٠٢٦</p>
+    </footer>
 
-  <footer class="footer">
-    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
-    <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <div class="footer__links">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
-    </div>
-    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
-  </footer>
-
-  <script>
+    <script>
     // Gate data
     const gates = [
       {
@@ -417,6 +462,6 @@
     }, { threshold: 0.1 });
     revealElements.forEach(el => observer.observe(el));
   </script>
-  <script src="js/i18n.js"></script>
-</body>
+    <script src="js/i18n.js"></script>
+  </body>
 </html>

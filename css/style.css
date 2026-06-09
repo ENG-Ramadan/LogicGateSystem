@@ -21,17 +21,13 @@
   --accent-yellow: #ffd600;
   --accent-orange: #ff8c00;
   --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
-  --gradient-hero: linear-gradient(
-    160deg,
-    #060614 0%,
-    #0c0c24 40%,
-    #1a0a30 100%
-  );
-  --gradient-card: linear-gradient(
-    145deg,
-    rgba(0, 212, 255, 0.06) 0%,
-    rgba(139, 92, 246, 0.06) 100%
-  );
+  --gradient-hero: linear-gradient(160deg,
+      #060614 0%,
+      #0c0c24 40%,
+      #1a0a30 100%);
+  --gradient-card: linear-gradient(145deg,
+      rgba(0, 212, 255, 0.06) 0%,
+      rgba(139, 92, 246, 0.06) 100%);
   --shadow-glow-sm: 0 0 15px rgba(0, 212, 255, 0.12);
   --shadow-glow-md: 0 0 30px rgba(0, 212, 255, 0.18);
   --shadow-glow-lg: 0 4px 60px rgba(0, 212, 255, 0.22);
@@ -630,11 +626,9 @@ a:focus-visible,
   inset: 0;
   border-radius: inherit;
   opacity: 0;
-  background: radial-gradient(
-    350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(0, 212, 255, 0.06),
-    transparent 60%
-  );
+  background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(0, 212, 255, 0.06),
+      transparent 60%);
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
@@ -1048,8 +1042,15 @@ a:focus-visible,
 }
 
 @keyframes ledPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.6), 0 0 40px rgba(0, 255, 136, 0.3); }
-  50% { box-shadow: 0 0 25px rgba(0, 255, 136, 0.7), 0 0 50px rgba(0, 255, 136, 0.35); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6), 0 0 40px rgba(0, 255, 136, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.7), 0 0 50px rgba(0, 255, 136, 0.35);
+  }
 }
 
 .gate-demo__led.off {
@@ -1298,7 +1299,7 @@ a:focus-visible,
   display: flex;
   gap: 0;
   margin-bottom: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .sim-panel__tab {
@@ -1353,7 +1354,7 @@ a:focus-visible,
   padding: 5px 8px;
   border-radius: var(--radius-sm);
   margin-bottom: 3px;
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
   font-size: 0.82rem;
 }
 
@@ -1387,7 +1388,7 @@ a:focus-visible,
   max-height: 220px;
   overflow-y: auto;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .sim-results__table-wrap::-webkit-scrollbar {
@@ -1395,7 +1396,7 @@ a:focus-visible,
 }
 
 .sim-results__table-wrap::-webkit-scrollbar-thumb {
-  background: rgba(0,212,255,0.2);
+  background: rgba(0, 212, 255, 0.2);
   border-radius: 2px;
 }
 
@@ -1407,7 +1408,7 @@ a:focus-visible,
 }
 
 .sim-results__table-wrap th {
-  background: rgba(0,212,255,0.06);
+  background: rgba(0, 212, 255, 0.06);
   color: var(--accent-cyan);
   padding: 6px 8px;
   font-weight: 700;
@@ -1419,15 +1420,15 @@ a:focus-visible,
 .sim-results__table-wrap td {
   padding: 4px 8px;
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .sim-results__table-wrap tr:hover {
-  background: rgba(0,212,255,0.03);
+  background: rgba(0, 212, 255, 0.03);
 }
 
 .sim-results__table-wrap tr.row-active {
-  background: rgba(0,255,136,0.06);
+  background: rgba(0, 255, 136, 0.06);
 }
 
 /* Results: expression */
@@ -1435,8 +1436,8 @@ a:focus-visible,
   font-family: var(--font-mono);
   font-size: 0.88rem;
   padding: 10px 12px;
-  background: rgba(0,212,255,0.04);
-  border: 1px solid rgba(0,212,255,0.1);
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: var(--radius-sm);
   color: var(--accent-cyan);
   word-break: break-word;
@@ -1686,6 +1687,7 @@ a:focus-visible,
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     opacity: 1;
@@ -1699,6 +1701,7 @@ a:focus-visible,
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
@@ -1722,6 +1725,7 @@ a:focus-visible,
 }
 
 @keyframes glow {
+
   0%,
   100% {
     box-shadow: 0 0 5px rgba(0, 212, 255, 0.2);
@@ -1733,13 +1737,23 @@ a:focus-visible,
 }
 
 @keyframes circuitPulse {
-  0% { stroke-dashoffset: 200; }
-  100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 200;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-fade-in {
@@ -1767,13 +1781,33 @@ a:focus-visible,
 }
 
 /* Staggered delays */
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-.reveal-delay-5 { transition-delay: 0.40s; }
-.reveal-delay-6 { transition-delay: 0.48s; }
-.reveal-delay-7 { transition-delay: 0.56s; }
+.reveal-delay-1 {
+  transition-delay: 0.08s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.16s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.24s;
+}
+
+.reveal-delay-4 {
+  transition-delay: 0.32s;
+}
+
+.reveal-delay-5 {
+  transition-delay: 0.40s;
+}
+
+.reveal-delay-6 {
+  transition-delay: 0.48s;
+}
+
+.reveal-delay-7 {
+  transition-delay: 0.56s;
+}
 
 /* ========================================
    SECTION: UTILITIES
@@ -2078,6 +2112,7 @@ a:focus-visible,
     color: #555 !important;
   }
 }
+
 /* ========================================
    SECTION: SIMULATOR NODES
    ======================================== */
@@ -2085,16 +2120,19 @@ a:focus-visible,
   min-width: 110px;
   text-align: center;
 }
+
 .sim-gate__inputs {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .sim-gate__outputs {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .sim-gate__port-row {
   display: flex;
   align-items: center;
@@ -2103,10 +2141,12 @@ a:focus-visible,
   font-size: 0.65rem;
   color: var(--text-muted);
 }
+
 .sim-wire {
   stroke: var(--text-muted);
   transition: stroke 0.3s ease;
 }
+
 .sim-wire.active {
   stroke: var(--accent-green);
   filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.5));
@@ -2114,14 +2154,22 @@ a:focus-visible,
 }
 
 @keyframes wirePulse {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.5)); }
-  50% { filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.7)); }
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.5));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.7));
+  }
 }
 
 .sim-wire.inactive {
   stroke: var(--accent-red);
   opacity: 0.5;
 }
+
 .sim-wire-preview {
   stroke: var(--accent-cyan);
   stroke-dasharray: 6 4;
@@ -2130,7 +2178,9 @@ a:focus-visible,
 }
 
 @keyframes wireDash {
-  to { stroke-dashoffset: -10; }
+  to {
+    stroke-dashoffset: -10;
+  }
 }
 
 .sim-input-switch {
@@ -2143,6 +2193,7 @@ a:focus-visible,
   background: var(--accent-red);
   position: relative;
 }
+
 .sim-input-switch::after {
   content: "";
   position: absolute;
@@ -2154,14 +2205,17 @@ a:focus-visible,
   inset-inline-end: 3px;
   transition: inset-inline-end 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), inset-inline-start 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
 .sim-input-switch.on {
   background: var(--accent-green);
   box-shadow: 0 0 14px rgba(0, 255, 136, 0.45);
 }
+
 .sim-input-switch.on::after {
   inset-inline-end: auto;
   inset-inline-start: 3px;
 }
+
 .sim-input-switch:hover {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
 }
@@ -2172,6 +2226,7 @@ a:focus-visible,
   border-radius: 50%;
   transition: all 0.3s ease;
 }
+
 .sim-output-led.on {
   background: var(--accent-green);
   box-shadow:
@@ -2180,6 +2235,7 @@ a:focus-visible,
     0 0 45px rgba(0, 255, 136, 0.1);
   animation: ledPulse 2s ease-in-out infinite;
 }
+
 .sim-output-led.off {
   background: rgba(255, 51, 102, 0.3);
   border: 2px solid var(--accent-red);
@@ -2188,11 +2244,13 @@ a:focus-visible,
 .connection-mode .sim-canvas {
   cursor: crosshair;
 }
+
 .delete-mode .sim-gate,
 .delete-mode .sim-input-node,
 .delete-mode .sim-output-node {
   cursor: not-allowed;
 }
+
 .delete-mode .sim-gate:hover,
 .delete-mode .sim-input-node:hover,
 .delete-mode .sim-output-node:hover {
@@ -2203,6 +2261,7 @@ a:focus-visible,
 .sim-toolbar__section {
   margin-bottom: 16px;
 }
+
 .sim-toolbar__section-title {
   font-size: 0.7rem;
   color: var(--text-muted);
@@ -2232,10 +2291,12 @@ a:focus-visible,
     width: 160px;
     padding: 12px 8px;
   }
+
   .sim-info {
     display: none;
   }
 }
+
 /* ========================================
    SECTION: COMBINATIONAL LOGIC / K-MAP PAGE
    ======================================== */

@@ -1,127 +1,167 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_ar_title">الواقع المعزز — LogicAR</title>
-  <meta name="description" content="شاهد البوابات المنطقية بتقنية الواقع المعزز ثلاثي الأبعاد">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <a href="#arInstructions" class="skip-link">Skip to content</a>
-  <div class="bg-grid"></div>
-  <div class="bg-glow bg-glow--cyan"></div>
-  <div class="bg-glow bg-glow--purple"></div>
-  <div class="bg-grain"></div>
- <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar__logo">
-      <div class="navbar__logo-icon" style="display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f0ff" /><stop offset="100%" stop-color="#8a2be2" /></linearGradient></defs><path d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z" stroke="url(#logoGrad)"></path><path d="M1 9h3" stroke="#00f0ff"></path><path d="M1 15h3" stroke="#00f0ff"></path><path d="M17 12h6" stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5" fill="#00f0ff" stroke="none"></circle></svg></div>
-      <span>Logic<span class="text-gradient">AR</span></span>
-    </div>
-   
-    <div class="navbar__links" id="navLinks">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
-      <a href="combinational.html" data-i18n="nav_combinational">دوائر توافقية</a>
-      <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-      <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
-      <a href="ar.html" class="active" data-i18n="nav_ar">الواقع المعزز</a>
-      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
-    </div>
-     <div class="navbar__lang">
-       <button class="lang-btn" data-lang="en">EN</button>
-       <button class="lang-btn" data-lang="ar">عربي</button>
-     </div>
-    <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
-  </nav>
-  <!-- AR Instructions -->
-  <div class="ar-container" id="arInstructions">
-    <div class="ar-instructions">
-      <div class="ar-instructions__icon animate-float"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: inherit;"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
-      <h1 class="ar-instructions__title" data-i18n="ar_exp_title">تجربة <span class="text-gradient">الواقع المعزز</span></h1>
-      <p class="ar-instructions__text" data-i18n="ar_exp_desc">
-        وجّه كاميرا هاتفك نحو العلامة المطبوعة وشاهد البوابة المنطقية تظهر كمجسم ثلاثي الأبعاد مع المعلومات التعليمية
-      </p>
-
-      <div class="ar-steps">
-        <div class="ar-step">
-          <div class="ar-step__num">١</div>
-          <p class="ar-step__text" data-i18n="ar_step_1">اطبع العلامات من <a href="markers.html">صفحة العلامات</a></p>
-        </div>
-        <div class="ar-step">
-          <div class="ar-step__num">٢</div>
-          <p class="ar-step__text" data-i18n="ar_step_2">اختر البوابة المراد عرضها</p>
-        </div>
-        <div class="ar-step">
-          <div class="ar-step__num">٣</div>
-          <p class="ar-step__text" data-i18n="ar_step_3">اضغط "ابدأ الكاميرا" ووجّهها للعلامة</p>
-        </div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_ar_title">الواقع المعزز — LogicAR</title>
+    <meta name="description"
+      content="شاهد البوابات المنطقية بتقنية الواقع المعزز ثلاثي الأبعاد">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <a href="#arInstructions" class="skip-link">Skip to content</a>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--cyan"></div>
+    <div class="bg-glow bg-glow--purple"></div>
+    <div class="bg-grain"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon"
+          style="display:flex;align-items:center;"><svg width="28" height="28"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"><defs><lineargradient id="logoGrad" x1="0%"
+                y1="0%" x2="100%" y2="100%"><stop offset="0%"
+                  stop-color="#00f0ff" /><stop offset="100%"
+                  stop-color="#8a2be2" /></lineargradient></defs><path
+              d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z"
+              stroke="url(#logoGrad)"></path><path d="M1 9h3"
+              stroke="#00f0ff"></path><path d="M1 15h3"
+              stroke="#00f0ff"></path><path d="M17 12h6"
+              stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5"
+              fill="#00f0ff" stroke="none"></circle></svg></div>
+        <span>Logic<span class="text-gradient">AR</span></span>
       </div>
 
-      <!-- Gate Selector -->
-      <h3 style="margin-bottom:12px; color:var(--text-secondary);" data-i18n="ar_sel_gate">اختر البوابة:</h3>
-      <div class="marker-selector" id="gateSelector">
-        <div class="marker-selector__item active" data-gate="AND" onclick="selectGate(this, 'AND')">
-          <div class="name" style="color:#00d4ff;">AND</div>
-          <div class="name-ar">بوابة و</div>
-        </div>
-        <div class="marker-selector__item" data-gate="OR" onclick="selectGate(this, 'OR')">
-          <div class="name" style="color:#8b5cf6;">OR</div>
-          <div class="name-ar">بوابة أو</div>
-        </div>
-        <div class="marker-selector__item" data-gate="NOT" onclick="selectGate(this, 'NOT')">
-          <div class="name" style="color:#00ff88;">NOT</div>
-          <div class="name-ar">بوابة نفي</div>
-        </div>
-        <div class="marker-selector__item" data-gate="NAND" onclick="selectGate(this, 'NAND')">
-          <div class="name" style="color:#ffd600;">NAND</div>
-          <div class="name-ar">نفي و</div>
-        </div>
-        <div class="marker-selector__item" data-gate="NOR" onclick="selectGate(this, 'NOR')">
-          <div class="name" style="color:#ff8c00;">NOR</div>
-          <div class="name-ar">نفي أو</div>
-        </div>
-        <div class="marker-selector__item" data-gate="XOR" onclick="selectGate(this, 'XOR')">
-          <div class="name" style="color:#ff3366;">XOR</div>
-          <div class="name-ar">حصري أو</div>
-        </div>
-        <div class="marker-selector__item" data-gate="XNOR" onclick="selectGate(this, 'XNOR')">
-          <div class="name" style="color:#ff69b4;">XNOR</div>
-          <div class="name-ar">تكافؤ</div>
-        </div>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="combinational.html" data-i18n="nav_combinational">دوائر
+          توافقية</a>
+        <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
+        <a href="ar.html" class="active" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="markers.html" data-i18n="nav_markers">العلامات</a>
       </div>
+      <div class="navbar__lang">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="القائمة">☰</button>
+    </nav>
+    <!-- AR Instructions -->
+    <div class="ar-container" id="arInstructions">
+      <div class="ar-instructions">
+        <div class="ar-instructions__icon animate-float"><svg width="32"
+            height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            style="color: inherit;"><rect x="5" y="2" width="14" height="20"
+              rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01"
+              y2="18"></line></svg></div>
+        <h1 class="ar-instructions__title" data-i18n="ar_exp_title">تجربة <span
+            class="text-gradient">الواقع المعزز</span></h1>
+        <p class="ar-instructions__text" data-i18n="ar_exp_desc">
+          وجّه كاميرا هاتفك نحو العلامة المطبوعة وشاهد البوابة المنطقية تظهر
+          كمجسم ثلاثي الأبعاد مع المعلومات التعليمية
+        </p>
 
-      <button class="btn btn--primary btn--lg" onclick="startAR()" id="startArBtn" data-i18n="btn_start_cam">
-        📷 ابدأ الكاميرا
-      </button>
-      <p style="margin-top:16px; font-size:0.8rem; color:var(--text-muted);" data-i18n="cam_req">
-        يتطلب متصفح حديث يدعم الكاميرا (Chrome / Safari)
-      </p>
+        <div class="ar-steps">
+          <div class="ar-step">
+            <div class="ar-step__num">١</div>
+            <p class="ar-step__text" data-i18n="ar_step_1">اطبع العلامات من <a
+                href="markers.html">صفحة العلامات</a></p>
+          </div>
+          <div class="ar-step">
+            <div class="ar-step__num">٢</div>
+            <p class="ar-step__text" data-i18n="ar_step_2">اختر البوابة المراد
+              عرضها</p>
+          </div>
+          <div class="ar-step">
+            <div class="ar-step__num">٣</div>
+            <p class="ar-step__text" data-i18n="ar_step_3">اضغط "ابدأ الكاميرا"
+              ووجّهها للعلامة</p>
+          </div>
+        </div>
+
+        <!-- Gate Selector -->
+        <h3 style="margin-bottom:12px; color:var(--text-secondary);"
+          data-i18n="ar_sel_gate">اختر البوابة:</h3>
+        <div class="marker-selector" id="gateSelector">
+          <div class="marker-selector__item active" data-gate="AND"
+            onclick="selectGate(this, 'AND')">
+            <div class="name" style="color:#00d4ff;">AND</div>
+            <div class="name-ar">بوابة و</div>
+          </div>
+          <div class="marker-selector__item" data-gate="OR"
+            onclick="selectGate(this, 'OR')">
+            <div class="name" style="color:#8b5cf6;">OR</div>
+            <div class="name-ar">بوابة أو</div>
+          </div>
+          <div class="marker-selector__item" data-gate="NOT"
+            onclick="selectGate(this, 'NOT')">
+            <div class="name" style="color:#00ff88;">NOT</div>
+            <div class="name-ar">بوابة نفي</div>
+          </div>
+          <div class="marker-selector__item" data-gate="NAND"
+            onclick="selectGate(this, 'NAND')">
+            <div class="name" style="color:#ffd600;">NAND</div>
+            <div class="name-ar">نفي و</div>
+          </div>
+          <div class="marker-selector__item" data-gate="NOR"
+            onclick="selectGate(this, 'NOR')">
+            <div class="name" style="color:#ff8c00;">NOR</div>
+            <div class="name-ar">نفي أو</div>
+          </div>
+          <div class="marker-selector__item" data-gate="XOR"
+            onclick="selectGate(this, 'XOR')">
+            <div class="name" style="color:#ff3366;">XOR</div>
+            <div class="name-ar">حصري أو</div>
+          </div>
+          <div class="marker-selector__item" data-gate="XNOR"
+            onclick="selectGate(this, 'XNOR')">
+            <div class="name" style="color:#ff69b4;">XNOR</div>
+            <div class="name-ar">تكافؤ</div>
+          </div>
+        </div>
+
+        <button class="btn btn--primary btn--lg" onclick="startAR()"
+          id="startArBtn" data-i18n="btn_start_cam">
+          📷 ابدأ الكاميرا
+        </button>
+        <p style="margin-top:16px; font-size:0.8rem; color:var(--text-muted);"
+          data-i18n="cam_req">
+          يتطلب متصفح حديث يدعم الكاميرا (Chrome / Safari)
+        </p>
+      </div>
     </div>
-  </div>
 
-  <!-- AR Scene (loaded dynamically) -->
-  <div class="ar-view" id="arView">
-    <div id="arSceneContainer"></div>
-    <div class="ar-overlay" id="arOverlay">
-      <button class="btn btn--ghost btn--sm" onclick="stopAR()" data-i18n="btn_close">✕ إغلاق</button>
+    <!-- AR Scene (loaded dynamically) -->
+    <div class="ar-view" id="arView">
+      <div id="arSceneContainer"></div>
+      <div class="ar-overlay" id="arOverlay">
+        <button class="btn btn--ghost btn--sm" onclick="stopAR()"
+          data-i18n="btn_close">✕ إغلاق</button>
+      </div>
     </div>
-  </div>
 
-  <footer class="footer">
-    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
-    <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <div class="footer__links">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
-      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
-    </div>
-    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
-  </footer>
+    <footer class="footer">
+      <div class="footer__brand">Logic<span
+          class="text-gradient">AR</span></div>
+      <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات
+        المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+      </div>
+      <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي ©
+        ٢٠٢٦</p>
+    </footer>
 
-  <script>
+    <script>
     let selectedGate = 'AND';
     let arActive = false;
 
@@ -296,6 +336,6 @@
       }
     });
   </script>
-  <script src="js/i18n.js"></script>
-</body>
+    <script src="js/i18n.js"></script>
+  </body>
 </html>
