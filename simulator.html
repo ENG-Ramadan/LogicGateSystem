@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_sim_title">محاكي الدوائر — LogicAR</title>
+    <meta name="description"
+      content="صمم وجرّب الدوائر الرقمية من خلال سحب وإفلات البوابات المنطقية وتوصيلها">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <a href="#simulator" class="skip-link">Skip to content</a>
+    <div class="bg-grid"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon"
+          style="display:flex;align-items:center;"><svg width="28" height="28"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"><defs><lineargradient id="logoGrad" x1="0%"
+                y1="0%" x2="100%" y2="100%"><stop offset="0%"
+                  stop-color="#00f0ff" /><stop offset="100%"
+                  stop-color="#8a2be2" /></lineargradient></defs><path
+              d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z"
+              stroke="url(#logoGrad)"></path><path d="M1 9h3"
+              stroke="#00f0ff"></path><path d="M1 15h3"
+              stroke="#00f0ff"></path><path d="M17 12h6"
+              stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5"
+              fill="#00f0ff" stroke="none"></circle></svg></div>
+        <span>Logic<span class="text-gradient">AR</span></span>
+      </div>
+
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="combinational.html" data-i18n="nav_combinational">دوائر
+          توافقية</a>
+        <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+        <a href="simulator.html" class="active"
+          data-i18n="nav_simulator">المحاكي</a>
+        <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+      </div>
+      <div class="navbar__lang">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="القائمة">☰</button>
+    </nav>
+    <!-- Simulator -->
+    <div class="simulator" id="simulator">
+      <!-- Toolbar -->
+      <div class="sim-toolbar">
+        <div class="sim-toolbar__section">
+          <div class="sim-toolbar__section-title"
+            data-i18n="sim_toolbar_io">المدخلات والمخرجات</div>
+          <button class="sim-toolbar__item" data-type="INPUT" draggable="false"
+            onclick="addNode('INPUT')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(0,255,136,0.1); color:var(--accent-green);">IN</div>
+            <span data-i18n="sim_btn_input">مفتاح دخل</span>
+          </button>
+          <button class="sim-toolbar__item" data-type="OUTPUT" draggable="false"
+            onclick="addNode('OUTPUT')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(255,51,102,0.1); color:var(--accent-red);">OUT</div>
+            <span data-i18n="sim_btn_output">مصباح خرج</span>
+          </button>
+        </div>
+
+        <div class="sim-toolbar__section">
+          <div class="sim-toolbar__section-title"
+            data-i18n="sim_toolbar_basic">البوابات الأساسية</div>
+          <button class="sim-toolbar__item" onclick="addNode('AND')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(0,212,255,0.1); color:var(--accent-cyan);">AND</div>
+            <span data-i18n="sim_btn_and">بوابة و</span>
+          </button>
+          <button class="sim-toolbar__item" onclick="addNode('OR')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(139,92,246,0.1); color:var(--accent-purple);">OR</div>
+            <span data-i18n="sim_btn_or">بوابة أو</span>
+          </button>
+          <button class="sim-toolbar__item" onclick="addNode('NOT')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(0,255,136,0.1); color:var(--accent-green);">NOT</div>
+            <span data-i18n="sim_btn_not">بوابة نفي</span>
+          </button>
+        </div>
+
+        <div class="sim-toolbar__section">
+          <div class="sim-toolbar__section-title"
+            data-i18n="sim_toolbar_complex">البوابات المركبة</div>
+          <button class="sim-toolbar__item" onclick="addNode('NAND')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(255,214,0,0.1); color:var(--accent-yellow);">NAND</div>
+            <span data-i18n="sim_btn_nand">نفي و</span>
+          </button>
+          <button class="sim-toolbar__item" onclick="addNode('NOR')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(255,140,0,0.1); color:var(--accent-orange);">NOR</div>
+            <span data-i18n="sim_btn_nor">نفي أو</span>
+          </button>
+          <button class="sim-toolbar__item" onclick="addNode('XOR')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(255,51,102,0.1); color:var(--accent-red);">XOR</div>
+            <span data-i18n="sim_btn_xor">حصري أو</span>
+          </button>
+          <button class="sim-toolbar__item" onclick="addNode('XNOR')">
+            <div class="sim-toolbar__item-icon"
+              style="background:rgba(255,105,180,0.1); color:#ff69b4;">XNOR</div>
+            <span data-i18n="sim_btn_xnor">تكافؤ</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Area -->
+      <div class="sim-canvas" id="simCanvas">
+        <svg class="sim-canvas__svg" id="wiresSvg"></svg>
+
+        <!-- Onboarding hint -->
+        <div id="simHint"
+          style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;">
+          <div style="text-align:center; opacity:0.3;">
+            <div style="font-size:3rem; margin-bottom:12px;"><svg width="32"
+                height="32" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" style="color: inherit;"><path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+            <p style="font-size:1.1rem;" data-i18n="sim_hint_title">اختر بوابة
+              من القائمة لإضافتها</p>
+            <p style="font-size:0.85rem; margin-top:8px;"
+              data-i18n="sim_hint_desc">اضغط على منفذ خرج ثم منفذ دخل
+              للتوصيل</p>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="sim-controls">
+          <button class="sim-controls__btn" onclick="toggleConnectionMode()"
+            id="connectBtn" title="وضع التوصيل">
+            🔗 <span data-i18n="sim_btn_connect">توصيل</span>
+          </button>
+          <button class="sim-controls__btn sim-controls__btn--danger"
+            onclick="toggleDeleteMode()" id="deleteBtn" title="وضع الحذف">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: inherit; vertical-align: middle; margin-left: 8px;"><polyline
+                points="3 6 5 6 21 6"></polyline><path
+                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            <span data-i18n="sim_btn_delete">حذف</span>
+          </button>
+          <button class="sim-controls__btn sim-controls__btn--danger"
+            onclick="clearAll()" title="مسح الكل">
+            ♻️ <span data-i18n="sim_btn_clear">مسح الكل</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabbed Panel: Info + Results -->
+      <div class="sim-info" id="simInfo">
+        <div class="sim-panel__tabs">
+          <button class="sim-panel__tab active" onclick="switchTab('info')"
+            id="tabBtn-info" data-i18n="sim_tab_info">معلومات العنصر</button>
+          <button class="sim-panel__tab" onclick="switchTab('results')"
+            id="tabBtn-results" data-i18n="sim_tab_results">نتائج
+            الدائرة</button>
+        </div>
+
+        <!-- Tab: Element Info -->
+        <div class="sim-panel__content active" id="tabContent-info">
+          <div id="infoContent">
+            <p style="color:var(--text-muted); font-size:0.85rem;"
+              data-i18n="sim_info_empty">اضغط على أي بوابة لمشاهدة معلوماتها
+              هنا</p>
+          </div>
+        </div>
+
+        <!-- Tab: Circuit Results -->
+        <div class="sim-panel__content" id="tabContent-results">
+          <div id="resultsContent">
+            <p class="sim-results__empty" data-i18n="sim_results_no_circuit">أضف
+              مدخلات ومخرجات وبوابات لبناء دائرة</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sim-tooltip" id="tooltip"></div>
+
+    <script>
+    // ===== Circuit Simulator Engine =====
+
+    const GATE_DEFS = {
+      AND:  { inputs: 2, color: '#00d4ff', compute: (a,b) => a & b, formula: 'Y = A · B', desc: 'تُخرج 1 فقط عندما يكون كلا المدخلين 1', descEn: 'Outputs 1 only when both inputs are 1' },
+      OR:   { inputs: 2, color: '#8b5cf6', compute: (a,b) => a | b, formula: 'Y = A + B', desc: 'تُخرج 1 إذا كان أحد المدخلين أو كلاهما 1', descEn: 'Outputs 1 if either or both inputs are 1' },
+      NOT:  { inputs: 1, color: '#00ff88', compute: (a) => a ^ 1, formula: 'Y = Ā', desc: 'تعكس قيمة المدخل', descEn: 'Inverts the input value' },
+      NAND: { inputs: 2, color: '#ffd600', compute: (a,b) => (a & b) ^ 1, formula: 'Y = (A·B)̄', desc: 'عكس AND - بوابة عالمية', descEn: 'Inverted AND - Universal gate' },
+      NOR:  { inputs: 2, color: '#ff8c00', compute: (a,b) => (a | b) ^ 1, formula: 'Y = (A+B)̄', desc: 'عكس OR - بوابة عالمية', descEn: 'Inverted OR - Universal gate' },
+      XOR:  { inputs: 2, color: '#ff3366', compute: (a,b) => a ^ b, formula: 'Y = A ⊕ B', desc: 'تُخرج 1 عندما يختلف المدخلان', descEn: 'Outputs 1 when inputs differ' },
+      XNOR: { inputs: 2, color: '#ff69b4', compute: (a,b) => (a ^ b) ^ 1, formula: 'Y = (A⊕B)̄', desc: 'تُخرج 1 عندما يتساوى المدخلان', descEn: 'Outputs 1 when inputs are equal' },
+    };
+
+    let nodes = [];  // All nodes (gates, inputs, outputs)
+    let wires = [];  // All wire connections
+    let nextId = 1;
+    let selectedNode = null;
+    let connectingFrom = null;  // { nodeId, portType: 'output', portIndex }
+    let connectionMode = false;
+    let deleteMode = false;
+    let dragState = null;
+
+    const simCanvas = document.getElementById('simCanvas');
+    const wiresSvg = document.getElementById('wiresSvg');
+    const simHint = document.getElementById('simHint');
+
+    // ===== Add Node =====
+    function addNode(type) {
+      if (deleteMode) toggleDeleteMode();
+
+      const canvasRect = simCanvas.getBoundingClientRect();
+      const x = 150 + Math.random() * (canvasRect.width - 400);
+      const y = 80 + Math.random() * (canvasRect.height - 250);
+
+      const node = {
+        id: nextId++,
+        type: type,
+        x: x,
+        y: y,
+        inputValues: [],
+        outputValue: type === 'INPUT' ? 0 : 0,
+        inputConnections: [],  // [{ fromNodeId, fromPortIndex }] or null per input
+      };
+
+      if (type === 'INPUT') {
+        // No inputs, one output
+      } else if (type === 'OUTPUT') {
+        node.inputValues = [0];
+        node.inputConnections = [null];
+      } else {
+        const def = GATE_DEFS[type];
+        node.inputValues = new Array(def.inputs).fill(0);
+        node.inputConnections = new Array(def.inputs).fill(null);
+      }
+
+      nodes.push(node);
+      renderNode(node);
+      simHint.style.display = 'none';
+      simulate();
+    }
+
+    // ===== Render a Node =====
+    function renderNode(node) {
+      const el = document.createElement('div');
+      el.id = `node-${node.id}`;
+      el.style.left = node.x + 'px';
+      el.style.top = node.y + 'px';
+      el.dataset.nodeId = node.id;
+
+      if (node.type === 'INPUT') {
+        el.className = 'sim-input-node';
+        el.innerHTML = `
+          <div class="sim-input-node__body">
+            <button class="sim-input-switch ${node.outputValue ? 'on' : ''}"
+                    onclick="toggleSimInput(${node.id}, event)"></button>
+            <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">IN</span>
+            <div class="sim-gate__port" data-node="${node.id}" data-port-type="output" data-port-index="0"
+                 style="border-color:var(--accent-green);" onclick="handlePortClick(this, event)"></div>
+          </div>`;
+      } else if (node.type === 'OUTPUT') {
+        el.className = 'sim-output-node';
+        el.innerHTML = `
+          <div class="sim-output-node__body">
+            <div class="sim-gate__port" data-node="${node.id}" data-port-type="input" data-port-index="0"
+                 style="border-color:var(--accent-red);" onclick="handlePortClick(this, event)"></div>
+            <span style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">OUT</span>
+            <div class="sim-output-led ${node.outputValue ? 'on' : 'off'}" id="led-${node.id}"></div>
+          </div>`;
+      } else {
+        const def = GATE_DEFS[node.type];
+        el.className = 'sim-gate';
+
+        let inputPorts = '';
+        for (let i = 0; i < def.inputs; i++) {
+          const label = def.inputs === 1 ? 'A' : (i === 0 ? 'A' : 'B');
+          inputPorts += `
+            <div class="sim-gate__port-row">
+              <div class="sim-gate__port ${node.inputValues[i] ? 'active-1' : 'active-0'}"
+                   data-node="${node.id}" data-port-type="input" data-port-index="${i}"
+                   onclick="handlePortClick(this, event)" id="port-in-${node.id}-${i}"></div>
+              <span>${label}</span>
+            </div>`;
+        }
+
+        el.innerHTML = `
+          <div class="sim-gate__type" style="color:${def.color}">${node.type}</div>
+          <div class="sim-gate__ports">
+            <div class="sim-gate__inputs">${inputPorts}</div>
+            <div class="sim-gate__outputs">
+              <div class="sim-gate__port-row">
+                <span>Y</span>
+                <div class="sim-gate__port ${node.outputValue ? 'active-1' : 'active-0'}"
+                     data-node="${node.id}" data-port-type="output" data-port-index="0"
+                     onclick="handlePortClick(this, event)" id="port-out-${node.id}-0"></div>
+              </div>
+            </div>
+          </div>`;
+      }
+
+      // Drag functionality
+      el.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('sim-gate__port') || e.target.classList.contains('sim-input-switch')) return;
+        if (deleteMode) {
+          removeNode(node.id);
+          return;
+        }
+        startDrag(node.id, e);
+      });
+      el.addEventListener('touchstart', (e) => {
+        if (e.target.classList.contains('sim-gate__port') || e.target.classList.contains('sim-input-switch')) return;
+        if (deleteMode) { removeNode(node.id); return; }
+        const touch = e.touches[0];
+        startDrag(node.id, { clientX: touch.clientX, clientY: touch.clientY });
+      }, { passive: true });
+
+      // Select on click
+      el.addEventListener('click', (e) => {
+        if (!deleteMode && !connectionMode) {
+          selectNode(node.id);
+        }
+      });
+
+      simCanvas.appendChild(el);
+    }
+
+    // ===== Drag =====
+    function startDrag(nodeId, e) {
+      const node = nodes.find(n => n.id === nodeId);
+      if (!node) return;
+      dragState = {
+        nodeId,
+        offsetX: e.clientX - node.x,
+        offsetY: e.clientY - node.y
+      };
+      const el = document.getElementById(`node-${nodeId}`);
+      if (el) el.style.zIndex = 100;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      if (dragState) {
+        const node = nodes.find(n => n.id === dragState.nodeId);
+        if (!node) return;
+        node.x = e.clientX - dragState.offsetX;
+        node.y = e.clientY - dragState.offsetY;
+        const el = document.getElementById(`node-${node.id}`);
+        if (el) {
+          el.style.left = node.x + 'px';
+          el.style.top = node.y + 'px';
+        }
+        renderWires();
+      }
+      if (connectingFrom && connectionMode) {
+        renderPreviewWire(e.clientX, e.clientY);
+      }
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (dragState) {
+        const touch = e.touches[0];
+        const node = nodes.find(n => n.id === dragState.nodeId);
+        if (!node) return;
+        node.x = touch.clientX - dragState.offsetX;
+        node.y = touch.clientY - dragState.offsetY;
+        const el = document.getElementById(`node-${node.id}`);
+        if (el) {
+          el.style.left = node.x + 'px';
+          el.style.top = node.y + 'px';
+        }
+        renderWires();
+      }
+    }, { passive: true });
+
+    document.addEventListener('mouseup', () => {
+      if (dragState) {
+        const el = document.getElementById(`node-${dragState.nodeId}`);
+        if (el) el.style.zIndex = 10;
+        dragState = null;
+      }
+    });
+    document.addEventListener('touchend', () => { dragState = null; });
+
+    // ===== Connection Mode =====
+    function toggleConnectionMode() {
+      connectionMode = !connectionMode;
+      if (deleteMode) { deleteMode = false; document.getElementById('deleteBtn').style.background = ''; }
+      document.getElementById('connectBtn').style.background = connectionMode ? 'rgba(0,212,255,0.2)' : '';
+      document.getElementById('simulator').classList.toggle('connection-mode', connectionMode);
+      connectingFrom = null;
+      removePreviewWire();
+    }
+
+    function toggleDeleteMode() {
+      deleteMode = !deleteMode;
+      if (connectionMode) { connectionMode = false; document.getElementById('connectBtn').style.background = ''; }
+      document.getElementById('deleteBtn').style.background = deleteMode ? 'rgba(255,51,102,0.2)' : '';
+      document.getElementById('simulator').classList.toggle('delete-mode', deleteMode);
+      connectingFrom = null;
+      removePreviewWire();
+    }
+
+    // ===== Port Click (Wiring) =====
+    function handlePortClick(portEl, e) {
+      e.stopPropagation();
+
+      if (deleteMode) {
+        // Delete wire connected to this port
+        const nodeId = parseInt(portEl.dataset.node);
+        const portType = portEl.dataset.portType;
+        const portIndex = parseInt(portEl.dataset.portIndex);
+        if (portType === 'input') {
+          wires = wires.filter(w => !(w.toNodeId === nodeId && w.toPortIndex === portIndex));
+          const node = nodes.find(n => n.id === nodeId);
+          if (node) node.inputConnections[portIndex] = null;
+        } else {
+          wires = wires.filter(w => !(w.fromNodeId === nodeId && w.fromPortIndex === portIndex));
+          nodes.forEach(n => {
+            n.inputConnections.forEach((conn, i) => {
+              if (conn && conn.fromNodeId === nodeId && conn.fromPortIndex === portIndex) {
+                n.inputConnections[i] = null;
+              }
+            });
+          });
+        }
+        markCircuitDirty();
+        simulate();
+        renderWires();
+        return;
+      }
+
+      if (!connectionMode) {
+        // Auto-enable connection mode on port click
+        connectionMode = true;
+        document.getElementById('connectBtn').style.background = 'rgba(0,212,255,0.2)';
+        document.getElementById('simulator').classList.add('connection-mode');
+      }
+
+      const nodeId = parseInt(portEl.dataset.node);
+      const portType = portEl.dataset.portType;
+      const portIndex = parseInt(portEl.dataset.portIndex);
+
+      if (!connectingFrom) {
+        // Start connection from output port
+        if (portType === 'output') {
+          connectingFrom = { nodeId, portIndex };
+          portEl.style.boxShadow = '0 0 12px rgba(0,212,255,0.8)';
+        } else {
+          // Or start from input (reverse connection)
+          connectingFrom = { nodeId, portIndex, isInput: true };
+          portEl.style.boxShadow = '0 0 12px rgba(0,212,255,0.8)';
+        }
+      } else {
+        // Complete connection
+        if (connectingFrom.isInput) {
+          // Started from input, so this should be output
+          if (portType === 'output') {
+            createWire(nodeId, portIndex, connectingFrom.nodeId, connectingFrom.portIndex);
+          }
+        } else {
+          // Started from output, so this should be input
+          if (portType === 'input' && nodeId !== connectingFrom.nodeId) {
+            createWire(connectingFrom.nodeId, connectingFrom.portIndex, nodeId, portIndex);
+          }
+        }
+        // Reset
+        connectingFrom = null;
+        removePreviewWire();
+        document.querySelectorAll('.sim-gate__port').forEach(p => p.style.boxShadow = '');
+        if (connectionMode) {
+          connectionMode = false;
+          document.getElementById('connectBtn').style.background = '';
+          document.getElementById('simulator').classList.remove('connection-mode');
+        }
+      }
+    }
+
+    function createWire(fromNodeId, fromPortIndex, toNodeId, toPortIndex) {
+      // Prevent duplicate connections to same input
+      const targetNode = nodes.find(n => n.id === toNodeId);
+      if (!targetNode) return;
+
+      // Remove existing connection to this input
+      wires = wires.filter(w => !(w.toNodeId === toNodeId && w.toPortIndex === toPortIndex));
+
+      // Check for cycles (simple)
+      if (wouldCreateCycle(fromNodeId, toNodeId)) {
+        const loopMsg = (typeof translations !== 'undefined' && translations[window.currentLang]) ? translations[window.currentLang].sim_err_loop : 'لا يمكن إنشاء دائرة مغلقة!';
+        showTooltip(loopMsg, 2000);
+        return;
+      }
+
+      wires.push({ fromNodeId, fromPortIndex, toNodeId, toPortIndex });
+      targetNode.inputConnections[toPortIndex] = { fromNodeId, fromPortIndex };
+
+      markCircuitDirty();
+      simulate();
+      renderWires();
+    }
+
+    function wouldCreateCycle(fromId, toId) {
+      if (fromId === toId) return true;
+      const visited = new Set();
+      const queue = [fromId];
+      while (queue.length > 0) {
+        const current = queue.shift();
+        if (visited.has(current)) continue;
+        visited.add(current);
+        const currentNode = nodes.find(n => n.id === current);
+        if (!currentNode) continue;
+        for (const conn of currentNode.inputConnections) {
+          if (conn) {
+            if (conn.fromNodeId === toId) return true;
+            queue.push(conn.fromNodeId);
+          }
+        }
+      }
+      return false;
+    }
+
+    // ===== Simulation =====
+    function simulate() {
+      // Topological sort and propagate
+      const maxIterations = nodes.length + 1;
+      for (let iter = 0; iter < maxIterations; iter++) {
+        let changed = false;
+        for (const node of nodes) {
+          if (node.type === 'INPUT') continue;
+
+          // Read inputs from connections
+          for (let i = 0; i < node.inputConnections.length; i++) {
+            const conn = node.inputConnections[i];
+            if (conn) {
+              const srcNode = nodes.find(n => n.id === conn.fromNodeId);
+              if (srcNode) {
+                const newVal = srcNode.outputValue;
+                if (node.inputValues[i] !== newVal) {
+                  node.inputValues[i] = newVal;
+                  changed = true;
+                }
+              }
+            } else {
+              if (node.inputValues[i] !== 0) {
+                node.inputValues[i] = 0;
+                changed = true;
+              }
+            }
+          }
+
+          // Compute output
+          let newOutput;
+          if (node.type === 'OUTPUT') {
+            newOutput = node.inputValues[0];
+          } else {
+            const def = GATE_DEFS[node.type];
+            if (def.inputs === 1) {
+              newOutput = def.compute(node.inputValues[0]);
+            } else {
+              newOutput = def.compute(node.inputValues[0], node.inputValues[1]);
+            }
+          }
+
+          if (node.outputValue !== newOutput) {
+            node.outputValue = newOutput;
+            changed = true;
+          }
+        }
+        if (!changed) break;
+      }
+
+      // Update visuals
+      updateNodeVisuals();
+      renderWires();
+      if (activeTab === 'results') updateResultsPanel();
+    }
+
+    function updateNodeVisuals() {
+      for (const node of nodes) {
+        if (node.type === 'OUTPUT') {
+          const led = document.getElementById(`led-${node.id}`);
+          if (led) led.className = 'sim-output-led ' + (node.outputValue ? 'on' : 'off');
+        }
+
+        // Update port visuals
+        if (node.type !== 'INPUT' && node.type !== 'OUTPUT') {
+          for (let i = 0; i < node.inputValues.length; i++) {
+            const portEl = document.getElementById(`port-in-${node.id}-${i}`);
+            if (portEl) {
+              portEl.className = portEl.className.replace(/active-[01]/g, '').trim();
+              portEl.classList.add(node.inputValues[i] ? 'active-1' : 'active-0');
+            }
+          }
+          const outPort = document.getElementById(`port-out-${node.id}-0`);
+          if (outPort) {
+            outPort.className = outPort.className.replace(/active-[01]/g, '').trim();
+            outPort.classList.add(node.outputValue ? 'active-1' : 'active-0');
+          }
+        }
+      }
+    }
+
+    // ===== Toggle Input Switch =====
+    function toggleSimInput(nodeId, e) {
+      e.stopPropagation();
+      const node = nodes.find(n => n.id === nodeId);
+      if (!node || node.type !== 'INPUT') return;
+      node.outputValue = node.outputValue ^ 1;
+      const switchEl = e.target;
+      switchEl.classList.toggle('on', node.outputValue === 1);
+      markCircuitDirty();
+      simulate();
+    }
+
+    // ===== Render Wires =====
+    function renderWires() {
+      wiresSvg.innerHTML = '';
+      const canvasRect = simCanvas.getBoundingClientRect();
+
+      for (const wire of wires) {
+        const fromPos = getPortPosition(wire.fromNodeId, 'output', wire.fromPortIndex, canvasRect);
+        const toPos = getPortPosition(wire.toNodeId, 'input', wire.toPortIndex, canvasRect);
+        if (!fromPos || !toPos) continue;
+
+        const fromNode = nodes.find(n => n.id === wire.fromNodeId);
+        const isActive = fromNode ? fromNode.outputValue : 0;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const dx = Math.abs(toPos.x - fromPos.x) * 0.5;
+        path.setAttribute('d', `M${fromPos.x},${fromPos.y} C${fromPos.x + dx},${fromPos.y} ${toPos.x - dx},${toPos.y} ${toPos.x},${toPos.y}`);
+        path.classList.add('sim-wire', isActive ? 'active' : 'inactive');
+        wiresSvg.appendChild(path);
+      }
+    }
+
+    function getPortPosition(nodeId, portType, portIndex, canvasRect) {
+      const nodeEl = document.getElementById(`node-${nodeId}`);
+      if (!nodeEl) return null;
+      const ports = nodeEl.querySelectorAll(`[data-port-type="${portType}"][data-port-index="${portIndex}"]`);
+      if (ports.length === 0) return null;
+      const portRect = ports[0].getBoundingClientRect();
+      return {
+        x: portRect.left + portRect.width / 2 - canvasRect.left,
+        y: portRect.top + portRect.height / 2 - canvasRect.top
+      };
+    }
+
+    function renderPreviewWire(mouseX, mouseY) {
+      removePreviewWire();
+      if (!connectingFrom) return;
+      const canvasRect = simCanvas.getBoundingClientRect();
+      let fromPos;
+      if (connectingFrom.isInput) {
+        fromPos = getPortPosition(connectingFrom.nodeId, 'input', connectingFrom.portIndex, canvasRect);
+      } else {
+        fromPos = getPortPosition(connectingFrom.nodeId, 'output', connectingFrom.portIndex, canvasRect);
+      }
+      if (!fromPos) return;
+      const toX = mouseX - canvasRect.left;
+      const toY = mouseY - canvasRect.top;
+      const dx = Math.abs(toX - fromPos.x) * 0.5;
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', `M${fromPos.x},${fromPos.y} C${fromPos.x + dx},${fromPos.y} ${toX - dx},${toY} ${toX},${toY}`);
+      path.classList.add('sim-wire-preview');
+      path.id = 'previewWire';
+      wiresSvg.appendChild(path);
+    }
+
+    function removePreviewWire() {
+      const pw = document.getElementById('previewWire');
+      if (pw) pw.remove();
+    }
+
+    // ===== Remove Node =====
+    function removeNode(nodeId) {
+      // Remove all wires connected to this node
+      wires = wires.filter(w => w.fromNodeId !== nodeId && w.toNodeId !== nodeId);
+      // Clean up input connections on other nodes
+      nodes.forEach(n => {
+        n.inputConnections = n.inputConnections.map(conn => {
+          if (conn && conn.fromNodeId === nodeId) return null;
+          return conn;
+        });
+      });
+      nodes = nodes.filter(n => n.id !== nodeId);
+      const el = document.getElementById(`node-${nodeId}`);
+      if (el) el.remove();
+      markCircuitDirty();
+      simulate();
+      if (nodes.length === 0) simHint.style.display = 'flex';
+    }
+
+    // ===== Clear All =====
+    function clearAll() {
+      nodes = [];
+      wires = [];
+      connectingFrom = null;
+      wiresSvg.innerHTML = '';
+      simCanvas.querySelectorAll('.sim-gate, .sim-input-node, .sim-output-node').forEach(el => el.remove());
+      simHint.style.display = 'flex';
+      const emptyMsg = (typeof translations !== 'undefined' && translations[window.currentLang]) ? translations[window.currentLang].sim_info_empty : 'اضغط على أي بوابة لمشاهدة معلوماتها هنا';
+      document.getElementById('infoContent').innerHTML = `<p style="color:var(--text-muted); font-size:0.85rem;" data-i18n="sim_info_empty">${emptyMsg}</p>`;
+      markCircuitDirty();
+      updateResultsPanel();
+    }
+
+    // ===== Select Node =====
+    function selectNode(nodeId) {
+      selectedNode = nodeId;
+      // Highlight
+      simCanvas.querySelectorAll('.sim-gate').forEach(el => el.classList.remove('selected'));
+      const el = document.getElementById(`node-${nodeId}`);
+      if (el) el.classList.add('selected');
+
+      const node = nodes.find(n => n.id === nodeId);
+      if (!node) return;
+
+      const infoContent = document.getElementById('infoContent');
+      const lang = window.currentLang || document.documentElement.lang || 'ar';
+      const t = (typeof translations !== 'undefined' && translations[lang]) ? translations[lang] : (translations ? translations['ar'] : null);
+
+      if (!t) return;
+
+      if (node.type === 'INPUT') {
+        infoContent.innerHTML = `
+          <div class="sim-info__gate-name" style="color:var(--accent-green);">INPUT</div>
+          <p class="sim-info__desc">${t.sim_info_in_desc}</p>
+          <div class="sim-info__current-val">
+            <span style="font-family:var(--font-mono); color:var(--accent-cyan);">${t.sim_info_curr_val}</span>
+            <span style="font-family:var(--font-mono); font-size:1.4rem; font-weight:700; color:${node.outputValue ? 'var(--accent-green)' : 'var(--accent-red)'}; margin-inline-start:8px;">${node.outputValue}</span>
+          </div>`;
+      } else if (node.type === 'OUTPUT') {
+        infoContent.innerHTML = `
+          <div class="sim-info__gate-name" style="color:var(--accent-red);">OUTPUT</div>
+          <p class="sim-info__desc">${t.sim_info_out_desc}</p>
+          <div class="sim-info__current-val">
+            <span style="font-family:var(--font-mono); color:var(--accent-cyan);">${t.sim_info_curr_val}</span>
+            <span style="font-family:var(--font-mono); font-size:1.4rem; font-weight:700; color:${node.outputValue ? 'var(--accent-green)' : 'var(--accent-red)'}; margin-inline-start:8px;">${node.outputValue}</span>
+          </div>`;
+      } else {
+        const def = GATE_DEFS[node.type];
+        const ttTitle = typeof translations !== 'undefined' && translations[lang] ? translations[lang].truth_table_title : 'جدول الحقيقة';
+
+        let truthTableHTML = `<h4 class="gate-card__section-label" style="margin-top:16px;">${ttTitle}</h4>`;
+        truthTableHTML += '<table class="truth-table" style="margin-top:8px;">';
+
+        const inputs = node.inputValues;
+
+        if (def.inputs === 1) {
+          truthTableHTML += '<thead><tr><th>A</th><th>Y</th></tr></thead><tbody>';
+          [0, 1].forEach(a => {
+            const y = def.compute(a);
+            const isActive = (inputs[0] === a);
+            truthTableHTML += `<tr class="${isActive ? 'truth-table__row--active' : ''}"><td class="val-${a}">${a}</td><td class="val-${y}">${y}</td></tr>`;
+          });
+        } else {
+          truthTableHTML += '<thead><tr><th>A</th><th>B</th><th>Y</th></tr></thead><tbody>';
+          [[0,0],[0,1],[1,0],[1,1]].forEach(([a,b]) => {
+            const y = def.compute(a,b);
+            const isActive = (inputs[0] === a && inputs[1] === b);
+            truthTableHTML += `<tr class="${isActive ? 'truth-table__row--active' : ''}"><td class="val-${a}">${a}</td><td class="val-${b}">${b}</td><td class="val-${y}">${y}</td></tr>`;
+          });
+        }
+        truthTableHTML += '</tbody></table>';
+
+        const descStr = lang === 'en' ? def.descEn : def.desc;
+
+        infoContent.innerHTML = `
+          <div class="sim-info__gate-name" style="color:${def.color};">${node.type}</div>
+          <p class="sim-info__desc">${descStr}</p>
+          <div class="gate-card__formula" style="margin-bottom:12px;">${def.formula}</div>
+          <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary); margin-bottom:4px;">
+            ${t.sim_info_inputs} ${node.inputValues.join(', ')}
+          </p>
+          <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--text-secondary);">
+            ${t.sim_info_output} <span style="color:${node.outputValue ? 'var(--accent-green)' : 'var(--accent-red)'}; font-weight:700;">${node.outputValue}</span>
+          </p>
+          ${truthTableHTML}`;
+      }
+    }
+
+    // ===== Tooltip =====
+    function showTooltip(text, duration = 2000) {
+      const tooltip = document.getElementById('tooltip');
+      tooltip.textContent = text;
+      tooltip.style.display = 'block';
+      tooltip.style.left = '50%';
+      tooltip.style.top = '50%';
+      tooltip.style.transform = 'translate(-50%, -50%)';
+      setTimeout(() => { tooltip.style.display = 'none'; }, duration);
+    }
+
+    // ===== Cancel connection on Escape =====
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        connectingFrom = null;
+        removePreviewWire();
+        document.querySelectorAll('.sim-gate__port').forEach(p => p.style.boxShadow = '');
+        if (connectionMode) toggleConnectionMode();
+        if (deleteMode) toggleDeleteMode();
+      }
+    });
+
+    // Nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.getElementById('navLinks').querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    });
+    // Re-render selected node when language changes
+    document.documentElement.addEventListener('languageChanged', () => {
+      if (selectedNode) selectNode(selectedNode);
+      updateResultsPanel();
+    });
+
+    // ===== Tab Switching =====
+    let activeTab = 'info';
+
+    function switchTab(tabId) {
+      activeTab = tabId;
+      document.querySelectorAll('.sim-panel__tab').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.sim-panel__content').forEach(c => c.classList.remove('active'));
+      document.getElementById(`tabBtn-${tabId}`).classList.add('active');
+      document.getElementById(`tabContent-${tabId}`).classList.add('active');
+      if (tabId === 'results') updateResultsPanel();
+    }
+
+    // ===== Circuit Results: dirty flag =====
+    let circuitDirty = true;
+
+    function markCircuitDirty() {
+      circuitDirty = true;
+    }
+
+    // ===== Circuit Results: Live Summary + Truth Table + Expression =====
+    function getInputLabels() {
+      return nodes.filter(n => n.type === 'INPUT').sort((a, b) => a.id - b.id);
+    }
+
+    function getOutputNodes() {
+      return nodes.filter(n => n.type === 'OUTPUT').sort((a, b) => a.id - b.id);
+    }
+
+    function t(key) {
+      const lang = window.currentLang || document.documentElement.lang || 'ar';
+      return (typeof translations !== 'undefined' && translations[lang] && translations[lang][key])
+        ? translations[lang][key] : key;
+    }
+
+    function updateResultsPanel() {
+      const container = document.getElementById('resultsContent');
+      if (!container) return;
+
+      const inputNodes = getInputLabels();
+      const outputNodes = getOutputNodes();
+
+      if (inputNodes.length === 0 && outputNodes.length === 0) {
+        container.innerHTML = `<p class="sim-results__empty">${t('sim_results_no_circuit')}</p>`;
+        return;
+      }
+
+      let html = '';
+
+      // Live Summary
+      html += `<div class="sim-results__section">`;
+      html += `<div class="sim-results__section-title">${t('sim_results_summary')}</div>`;
+
+      if (inputNodes.length > 0) {
+        html += `<div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:4px; font-weight:600;">${t('sim_results_inputs')}</div>`;
+        inputNodes.forEach((n, i) => {
+          const label = String.fromCharCode(65 + i);
+          const val = n.outputValue;
+          html += `<div class="sim-results__row">
+            <span class="sim-results__row-label">${label} (IN${i + 1})</span>
+            <span class="sim-results__row-value ${val ? 'on' : 'off'}">${val}</span>
+          </div>`;
+        });
+      }
+
+      if (outputNodes.length > 0) {
+        html += `<div style="font-size:0.7rem; color:var(--text-muted); margin-top:8px; margin-bottom:4px; font-weight:600;">${t('sim_results_outputs')}</div>`;
+        outputNodes.forEach((n, i) => {
+          const hasConnection = n.inputConnections[0] !== null;
+          const val = n.inputValues[0];
+          const outLabel = 'Y' + (outputNodes.length > 1 ? (i + 1) : '');
+          html += `<div class="sim-results__row">
+            <span class="sim-results__row-label">${outLabel} (OUT${i + 1})</span>
+            <span class="sim-results__row-value ${hasConnection ? (val ? 'on' : 'off') : 'disconnected'}">${hasConnection ? val : t('sim_results_disconnected')}</span>
+          </div>`;
+        });
+      }
+
+      html += `</div>`;
+
+      // Truth Table (only if there are inputs and outputs with connections)
+      if (inputNodes.length > 0 && outputNodes.length > 0) {
+        const hasConnectedOutput = outputNodes.some(n => n.inputConnections[0] !== null);
+        if (hasConnectedOutput) {
+          html += `<div class="sim-results__section">`;
+          html += `<div class="sim-results__section-title">${t('sim_results_truth_table')}</div>`;
+          html += generateCircuitTruthTable(inputNodes, outputNodes);
+          html += `</div>`;
+        }
+      }
+
+      // Boolean Expression
+      if (outputNodes.length > 0 && inputNodes.length > 0) {
+        const exprHtml = extractBooleanExpressions(inputNodes, outputNodes);
+        if (exprHtml) {
+          html += `<div class="sim-results__section">`;
+          html += `<div class="sim-results__section-title">${t('sim_results_expression')}</div>`;
+          html += exprHtml;
+          html += `</div>`;
+        }
+      }
+
+      container.innerHTML = html;
+    }
+
+    function generateCircuitTruthTable(inputNodes, outputNodes) {
+      const n = inputNodes.length;
+      if (n > 6) return `<p style="color:var(--text-muted); font-size:0.78rem;">${n} inputs (2^${n} rows)</p>`;
+
+      const originalValues = inputNodes.map(inp => inp.outputValue);
+
+      const rows = [];
+      const total = 1 << n;
+      for (let mask = 0; mask < total; mask++) {
+        for (let i = 0; i < n; i++) {
+          inputNodes[i].outputValue = (mask >> (n - 1 - i)) & 1;
+        }
+        simulateQuiet();
+        const outputVals = outputNodes.map(o => {
+          const conn = o.inputConnections[0];
+          if (!conn) return null;
+          return o.inputValues[0];
+        });
+        rows.push({ inputs: inputNodes.map(inp => inp.outputValue), outputs: outputVals });
+      }
+
+      for (let i = 0; i < n; i++) {
+        inputNodes[i].outputValue = originalValues[i];
+      }
+      simulateQuiet();
+
+      const currentInputs = originalValues;
+      let html = '<div class="sim-results__table-wrap"><table><thead><tr>';
+      inputNodes.forEach((_, i) => {
+        html += `<th>${String.fromCharCode(65 + i)}</th>`;
+      });
+      outputNodes.forEach((_, i) => {
+        html += `<th style="color:var(--accent-green);">Y${outputNodes.length > 1 ? (i + 1) : ''}</th>`;
+      });
+      html += '</tr></thead><tbody>';
+
+      rows.forEach(row => {
+        const isCurrentRow = row.inputs.every((v, i) => v === currentInputs[i]);
+        html += `<tr class="${isCurrentRow ? 'row-active' : ''}">`;
+        row.inputs.forEach(v => {
+          html += `<td class="val-${v}">${v}</td>`;
+        });
+        row.outputs.forEach(v => {
+          if (v === null) {
+            html += `<td style="color:var(--text-muted);">-</td>`;
+          } else {
+            html += `<td class="val-${v}">${v}</td>`;
+          }
+        });
+        html += '</tr>';
+      });
+
+      html += '</tbody></table></div>';
+      return html;
+    }
+
+    function simulateQuiet() {
+      const maxIterations = nodes.length + 1;
+      for (let iter = 0; iter < maxIterations; iter++) {
+        let changed = false;
+        for (const node of nodes) {
+          if (node.type === 'INPUT') continue;
+          for (let i = 0; i < node.inputConnections.length; i++) {
+            const conn = node.inputConnections[i];
+            if (conn) {
+              const srcNode = nodes.find(n => n.id === conn.fromNodeId);
+              if (srcNode) {
+                const newVal = srcNode.outputValue;
+                if (node.inputValues[i] !== newVal) {
+                  node.inputValues[i] = newVal;
+                  changed = true;
+                }
+              }
+            } else {
+              if (node.inputValues[i] !== 0) {
+                node.inputValues[i] = 0;
+                changed = true;
+              }
+            }
+          }
+          let newOutput;
+          if (node.type === 'OUTPUT') {
+            newOutput = node.inputValues[0];
+          } else {
+            const def = GATE_DEFS[node.type];
+            if (!def) continue;
+            newOutput = def.inputs === 1
+              ? def.compute(node.inputValues[0])
+              : def.compute(node.inputValues[0], node.inputValues[1]);
+          }
+          if (node.outputValue !== newOutput) {
+            node.outputValue = newOutput;
+            changed = true;
+          }
+        }
+        if (!changed) break;
+      }
+    }
+
+    function extractBooleanExpressions(inputNodes, outputNodes) {
+      const labelMap = {};
+      inputNodes.forEach((n, i) => { labelMap[n.id] = String.fromCharCode(65 + i); });
+
+      const expressions = [];
+      outputNodes.forEach((outNode, idx) => {
+        const conn = outNode.inputConnections[0];
+        if (!conn) return;
+        const expr = buildExpr(conn.fromNodeId, conn.fromPortIndex, labelMap);
+        const outLabel = 'Y' + (outputNodes.length > 1 ? (idx + 1) : '');
+        if (expr) expressions.push(`<div class="sim-results__expression">${outLabel} = ${expr}</div>`);
+      });
+
+      return expressions.join('');
+    }
+
+    function buildExpr(nodeId, portIndex, labelMap) {
+      const node = nodes.find(n => n.id === nodeId);
+      if (!node) return '?';
+      if (node.type === 'INPUT') return labelMap[nodeId] || `IN${nodeId}`;
+      const def = GATE_DEFS[node.type];
+      if (!def) return '?';
+
+      const inputExprs = [];
+      for (let i = 0; i < node.inputConnections.length; i++) {
+        const conn = node.inputConnections[i];
+        if (conn) {
+          inputExprs.push(buildExpr(conn.fromNodeId, conn.fromPortIndex, labelMap));
+        } else {
+          inputExprs.push('0');
+        }
+      }
+
+      switch (node.type) {
+        case 'AND':  return `(${inputExprs[0]} · ${inputExprs[1]})`;
+        case 'OR':   return `(${inputExprs[0]} + ${inputExprs[1]})`;
+        case 'NOT':  return `¬${inputExprs[0]}`;
+        case 'NAND': return `¬(${inputExprs[0]} · ${inputExprs[1]})`;
+        case 'NOR':  return `¬(${inputExprs[0]} + ${inputExprs[1]})`;
+        case 'XOR':  return `(${inputExprs[0]} ⊕ ${inputExprs[1]})`;
+        case 'XNOR': return `¬(${inputExprs[0]} ⊕ ${inputExprs[1]})`;
+        default:     return node.type;
+      }
+    }
+  </script>
+    <script src="js/i18n.js"></script>
+  </body>
+</html>

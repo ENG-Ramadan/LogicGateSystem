@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+    <head>
+        <meta charset="UTF-8">
+        <title>LogicAR - دليل المشروع الكامل</title>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #060614 0%, #0a0a1a 100%);
+            color: #eaeaff;
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(12, 12, 36, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9090cc;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            color: #00d4ff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-right: 4px solid #8b5cf6;
+            padding-right: 1rem;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            color: #a78bfa;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #c4b5fd;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #d1d1f0;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+            padding-right: 1rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            color: #c4c4e0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        th {
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85em;
+            color: #00ff88;
+            direction: ltr;
+            display: inline-block;
+        }
+
+        pre {
+            background: #0a0a14;
+            padding: 1.2rem;
+            border-radius: 16px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            direction: ltr;
+            text-align: left;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #eaeaff;
+            display: block;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #00d4ff;
+            margin-left: 8px;
+        }
+
+        .note {
+            background: rgba(139, 92, 246, 0.15);
+            border-right: 3px solid #8b5cf6;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .warning {
+            background: rgba(255, 51, 102, 0.1);
+            border-right: 3px solid #ff3366;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #8b5cf6, transparent);
+            margin: 2rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            color: #6060a0;
+            font-size: 0.9rem;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0.5cm;
+            }
+            .container {
+                background: white;
+                box-shadow: none;
+                padding: 0.5cm;
+                border: none;
+            }
+            h1, h2, h3, h4, p, li {
+                color: #111 !important;
+            }
+            .subtitle, .footer {
+                color: #555 !important;
+            }
+            code, pre {
+                background: #f0f0f0;
+                color: #000 !important;
+            }
+            .note, .warning {
+                background: #f5f5f5 !important;
+                border-color: #ccc !important;
+            }
+            th, td {
+                border-color: #ddd !important;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>📘 LogicAR</h1>
+            <div class="subtitle">دليل المشروع الكامل — شرح للمبتدئين
+                والمطورين</div>
+
+            <!-- ===================== 1 ===================== -->
+            <h2>🔷 1. المشروع ده بيعمل إيه؟</h2>
+            <p><strong>LogicAR</strong> هو موقع تعليمي تفاعلي لتعلم
+                <strong>البوابات المنطقية (Logic Gates)</strong>
+                و<strong>الدوائر الرقمية</strong> بتقنية <strong>الواقع المعزز
+                    (AR)</strong>.</p>
+            <ul>
+                <li>📖 شرح تفاعلي لكل بوابة مع جداول حقيقة</li>
+                <li>⚙ محاكي دوائر (سحب وإفلات وتوصيل)</li>
+                <li>🥽 تجربة واقع معزز — مجسمات 3D للبوابات</li>
+                <li>🗺 خريطة كارنوف لتبسيط المعادلات</li>
+                <li>🌐 دعم اللغتين العربية والإنجليزية</li>
+            </ul>
+
+            <!-- ===================== 2 ===================== -->
+            <h2>🔷 2. التقنيات المستخدمة</h2>
+            <table>
+                <thead><tr><th>التقنية</th><th>الاستخدام</th></tr></thead>
+                <tbody>
+                    <tr><td>HTML5</td><td>بنية الصفحات</td></tr>
+                    <tr><td>CSS3</td><td>التصميم والأنيميشن</td></tr>
+                    <tr><td>JavaScript (Vanilla)</td><td>المنطق
+                            البرمجي</td></tr>
+                    <tr><td>A-Frame + AR.js</td><td>الواقع المعزز والمجسمات
+                            3D</td></tr>
+                    <tr><td>SVG</td><td>رسم البوابات والأشكال</td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                ⚡ <strong>ملاحظة:</strong> المشروع بدون Frameworks (React/Vue)
+                وبدون Backend — ملفات ثابتة فقط.
+            </div>
+
+            <!-- ===================== 3 ===================== -->
+            <h2>🔷 3. هيكل الملفات</h2>
+            <pre><code>AR-v4/
+├── index.html              # الصفحة الرئيسية
+├── learn.html              # تعلم البوابات
+├── combinational.html      # دوائر توافقية
+├── sequential.html         # دوائر تعاقبية
+├── simulator.html          # محاكي الدوائر
+├── kmap.html               # خريطة كارنوف
+├── ar.html                 # تجربة الواقع المعزز
+├── markers.html            # علامات AR قابلة للطباعة
+├── css/
+│   └── style.css           # التصميم الكامل
+├── js/
+│   └── i18n.js             # نظام الترجمة
+└── update_css.sh</code></pre>
+
+            <!-- ===================== 4 ===================== -->
+            <h2>🔷 4. شرح كل صفحة بالتفصيل</h2>
+
+            <h3>📄 4.1 index.html — الرئيسية</h3>
+            <p>شريط تنقل + Hero section + مميزات + معاينة البوابات + خطوات البدء
+                + Footer.</p>
+
+            <h3>📄 4.2 learn.html — التعلم</h3>
+            <p>شرح 7 بوابات (AND, OR, NOT, NAND, NOR, XOR, XNOR). كل بوابة فيها
+                رمز SVG، جدول حقيقة، تجربة تفاعلية بمفاتيح وLED.</p>
+
+            <h3>📄 4.3 combinational.html — الدوائر التوافقية</h3>
+            <p>نصف الجامع (Half Adder)، مبدل 2:1 (Multiplexer)، مُفكك تشفير 2:4
+                (Decoder).</p>
+
+            <h3>📄 4.4 sequential.html — الدوائر التعاقبية</h3>
+            <p>SR Latch، D Flip-Flop، JK Flip-Flop، عداد 4-bit، مسجل إزاحة
+                (Shift Register).</p>
+
+            <h3>📄 4.5 simulator.html — المحاكي ⭐ الأكثر تعقيداً</h3>
+            <p>يمكنك إضافة بوابات، مدخلات، مخرجات، توصيلها بأسلاك، مع جدول حقيقة
+                تلقائي ومعادلة منطقية.</p>
+            <ul>
+                <li><code>nodes[]</code> — كل العناصر</li>
+                <li><code>wires[]</code> — كل التوصيلات</li>
+                <li><code>simulate()</code> — باستخدام Topological Sort</li>
+                <li><code>generateCircuitTruthTable()</code> — تجربة كل
+                    التركيبات</li>
+            </ul>
+
+            <h3>📄 4.6 kmap.html — خريطة كارنوف</h3>
+            <p>اختر 2/3/4 متغيرات، غيّر القيم (0/1/X)، وتحصل على المعادلة
+                المبسطة تلقائياً.</p>
+
+            <h3>📄 4.7 ar.html — الواقع المعزز</h3>
+            <p>يستخدم A-Frame + AR.js لتحميل الكاميرا وعرض مجسم 3D للبوابة فوق
+                العلامة المطبوعة.</p>
+
+            <h3>📄 4.8 markers.html — العلامات</h3>
+            <p>توليد علامات قابلة للطباعة (Barcode patterns) لاستخدامها مع
+                AR.</p>
+
+            <!-- ===================== 5 ===================== -->
+            <h2>🔷 5. ملف التصميم style.css</h2>
+            <p><span class="badge">CSS Variables</span> <span class="badge">RTL
+                    Support</span> <span class="badge">Animations</span></p>
+            <pre><code>:root {
+  --bg-primary: #060614;
+  --accent-cyan: #00d4ff;
+  --accent-purple: #8b5cf6;
+  --accent-green: #00ff88;
+}</code></pre>
+            <p>أقسام الـ CSS: Global, Animated Background, Navbar, Buttons,
+                Learn Page, Simulator, AR, K-Map, Utilities.</p>
+            <p><strong>أنيميشن الـ Scroll:</strong> استخدم كلاس
+                <code>reveal</code> مع IntersectionObserver.</p>
+
+            <!-- ===================== 6 ===================== -->
+            <h2>🔷 6. نظام الترجمة i18n.js</h2>
+            <p>كائن <code>translations</code> بمفاتيح <code>ar</code> و
+                <code>en</code>. العناصر تستخدم <code>data-i18n="key"</code>.
+                عند تغيير اللغة، يتم تحديث كل النصوص واتجاه الصفحة
+                (RTL/LTR).</p>
+
+            <!-- ===================== 7 ===================== -->
+            <h2>🔷 7. كيف تشغّل المشروع</h2>
+            <ul>
+                <li><strong>مباشر:</strong> افتح <code>index.html</code>双击</li>
+                <li><strong>بـ Live Server (موصى به للـ AR):</strong>
+                    <pre><code>python3 -m http.server 8000</code></pre>
+                </li>
+            </ul>
+            <div class="warning">
+                ⚠️ الـ AR يحتاج HTTPS أو localhost بسبب الكاميرا.
+            </div>
+
+            <!-- ===================== 8 ===================== -->
+            <h2>🔷 8. كيف تعدّل على المشروع</h2>
+            <h3>🎨 تغيير الألوان</h3>
+            <p>غيّر قيم المتغيرات في <code>:root</code> داخل style.css.</p>
+            <h3>➕ إضافة بوابة جديدة في learn.html</h3>
+            <p>أضف كائن داخل مصفوفة <code>gates</code>:</p>
+            <pre><code>{
+  id: 'new_gate',
+  name: 'NEW',
+  compute: (a,b) => a & b,
+  truthTable: [[0,0,0],...],
+  symbol: `&lt;svg&gt;...&lt;/svg&gt;`
+}</code></pre>
+            <h3>➕ إضافة صفحة جديدة</h3>
+            <p>انسخ صفحة موجودة، غيّر المحتوى، وأضف رابطاً في شريط التنقل.</p>
+
+            <!-- ===================== 9 ===================== -->
+            <h2>🔷 9. مفاهيم برمجية مهمة</h2>
+            <ul>
+                <li><strong>التواصل بين الصفحات:</strong> localStorage للغة +
+                    روابط عادية.</li>
+                <li><strong>إنشاء المحتوى ديناميكياً:</strong> يتم بواسطة
+                    JavaScript وليس HTML ثابت.</li>
+                <li><strong>الأحداث المخصصة:</strong>
+                    <code>CustomEvent('languageChanged')</code></li>
+            </ul>
+
+            <!-- ===================== 10 ===================== -->
+            <h2>🔷 10. نصائح للمبتدئين</h2>
+            <ul>
+                <li>ابدأ بقراءة <code>index.html</code></li>
+                <li>جرّب تغيير الألوان في CSS Variables</li>
+                <li>استخدم F12 لتجربة تعديلات لحظية</li>
+                <li>اختبر على الموبايل لتجربة AR</li>
+            </ul>
+
+            <!-- ===================== 11 ===================== -->
+            <h2>🔷 11. مشاكل وحلول شائعة</h2>
+            <table>
+                <thead><tr><th>المشكلة</th><th>الحل</th></tr></thead>
+                <tbody>
+                    <tr><td>AR مش شغال</td><td>استخدم Chrome على localhost أو
+                            HTTPS</td></tr>
+                    <tr><td>الكروت لا تظهر</td><td>افتح Console (F12) لتفحص
+                            الأخطاء</td></tr>
+                    <tr><td>الترجمة لا تتغير</td><td>تأكد من تحميل
+                            i18n.js</td></tr>
+                </tbody>
+            </table>
+
+            <!-- ===================== خاتمة ===================== -->
+            <hr>
+            <div class="footer">
+                📐 LogicAR — تعلم المنطق الرقمي بالواقع المعزز<br>
+                ملف PDF تم إنشاؤه من دليل المشروع — جميع الحقوق محفوظة
+            </div>
+        </div>
+
+        <script>
+    // هام: لضمان تحويل سهل إلى PDF
+    console.log("PDF ready — use Ctrl+P to save as PDF");
+</script>
+    </body>
+</html>

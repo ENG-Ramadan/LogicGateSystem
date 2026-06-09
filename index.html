@@ -1,75 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Professional Logic Gate System</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <main class="app-shell">
-            <header class="app-header">
-                <h1>Simulation Logic Gate </h1>
-                <p>Interactive simulator with live output, truth table, and gate
-                    details.</p>
-            </header>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="site_title">LogicAR — تعلم البوابات المنطقية بالواقع المعزز</title>
+  <meta name="description" content="وسيلة تعليمية تفاعلية لتعليم البوابات المنطقية والدوائر الكهربائية من خلال تقنية الواقع المعزز AR">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z' stroke='%2300f0ff'></path><path d='M1 9h3' stroke='%2300f0ff'></path><path d='M1 15h3' stroke='%2300f0ff'></path><path d='M17 12h6' stroke='%238a2be2'></path><circle cx='9' cy='12' r='1.5' fill='%2300f0ff' stroke='none'></circle></svg>"><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <a href="#hero" class="skip-link">Skip to content</a>
+  <!-- Background Effects -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow bg-glow--cyan"></div>
+  <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-grain"></div>
 
-            <section class="card controls-card">
-                <h2>Inputs</h2>
-                <div class="inputs" aria-label="Input toggles">
-                    <button type="button" id="btnA" class="input-btn">Input-1:
-                        OFF</button>
-                    <button type="button" id="btnB" class="input-btn">Input-2:
-                        OFF</button>
-                </div>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__logo">
+      <div class="navbar__logo-icon" style="display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f0ff" /><stop offset="100%" stop-color="#8a2be2" /></linearGradient></defs><path d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z" stroke="url(#logoGrad)"></path><path d="M1 9h3" stroke="#00f0ff"></path><path d="M1 15h3" stroke="#00f0ff"></path><path d="M17 12h6" stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5" fill="#00f0ff" stroke="none"></circle></svg></div>
+      <span>Logic<span class="text-gradient">AR</span></span>
+    </div>
+   
+    <div class="navbar__links" id="navLinks">
+      <a href="index.html" class="active" data-i18n="nav_home">الرئيسية</a>
+      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+      <a href="combinational.html" data-i18n="nav_combinational">دوائر توافقية</a>
+      <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+      <a href="kmap.html" data-i18n="nav_kmap">خريطة كارنوف</a>
+      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+    </div>
+     <div class="navbar__lang">
+       <button class="lang-btn" data-lang="en">EN</button>
+       <button class="lang-btn" data-lang="ar">عربي</button>
+     </div>
+    <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
+  </nav>
 
-                <div class="gate-selector">
-                    <p>Select gate:</p>
-                    <div id="gateButtons" class="gate-buttons">
-                        <button type="button" class="gate-btn"
-                            data-gate="AND">AND</button>
-                        <button type="button" class="gate-btn"
-                            data-gate="OR">OR</button>
-                        <button type="button" class="gate-btn"
-                            data-gate="NOT">NOT</button>
-                        <button type="button" class="gate-btn"
-                            data-gate="NAND">NAND</button>
-                        <button type="button" class="gate-btn"
-                            data-gate="NOR">NOR</button>
-                        <button type="button" class="gate-btn"
-                            data-gate="XOR">XOR</button>
-                    </div>
-                </div>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <span class="pulse"></span>
+        <span data-i18n="hero_badge">وسيلة تعليمية تفاعلية</span>
+      </div>
+      <h1 class="hero__title" data-i18n="hero_title">
+        تعلّم <span>البوابات المنطقية</span>
+        <br>بالواقع المعزز
+      </h1>
+      <p class="hero__subtitle" data-i18n="hero_subtitle">
+        اكتشف عالم الدوائر الرقمية من خلال تجربة تفاعلية ثلاثية الأبعاد.
+        افهم البوابات المنطقية، صمم دوائرك، وشاهدها تنبض بالحياة أمام عينيك.
+      </p>
+      <div class="hero__actions">
+        <a href="learn.html" class="btn btn--primary btn--lg" data-i18n="btn_start_learning">
+          ابدأ التعلم &larr;
+        </a>
+        <a href="simulator.html" class="btn btn--outline btn--lg" data-i18n="btn_try_simulator">
+          جرّب المحاكي
+        </a>
+      </div>
+    </div>
 
-                <div class="actions">
-                    <button type="button" id="resetBtn"
-                        class="secondary">Reset</button>
-                </div>
-            </section>
+    <!-- Decorative Circuit Lines -->
+    <div class="hero__circuit">
+      <svg width="400" height="300" viewBox="0 0 400 300" style="top: 10%; left: 5%;">
+        <path d="M0 150 H100 L120 100 H200 L220 150 H300 L320 80 H400" stroke="currentColor" stroke-width="2" fill="none"/>
+        <circle cx="100" cy="150" r="4" fill="currentColor"/>
+        <circle cx="200" cy="100" r="4" fill="currentColor"/>
+        <circle cx="300" cy="150" r="4" fill="currentColor"/>
+      </svg>
+      <svg width="300" height="200" viewBox="0 0 300 200" style="bottom: 15%; right: 8%;">
+        <path d="M0 100 H80 Q100 100 100 80 V50 Q100 30 120 30 H200 Q220 30 220 50 V100 Q220 120 240 120 H300" stroke="currentColor" stroke-width="2" fill="none"/>
+        <circle cx="80" cy="100" r="4" fill="currentColor"/>
+        <circle cx="220" cy="100" r="4" fill="currentColor"/>
+      </svg>
+    </div>
+  </section>
 
-            <section class="card output-card">
-                <h2>Output</h2>
-                <p id="gateInfo" class="gate-info">Choose a gate and set inputs
-                    to view evaluation.</p>
-                <div class="gate-figure" id="gateDiagram">
-                    <img id="gateDiagramImg" src alt="Gate diagram"
-                        class="gate-diagram-img">
-                </div>
-                <div class="output" id="output">OUTPUT: 0</div>
-            </section>
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="section__header reveal">
+      <span class="section__tag" data-i18n="features_tag">المميزات</span>
+      <h2 class="section__title" data-i18n="features_title">أدوات تعليمية متكاملة</h2>
+      <p class="section__desc" data-i18n="features_desc">
+        أربع طرق مختلفة للتعلم والاستكشاف، مصممة لتناسب جميع أنماط التعلم
+      </p>
+    </div>
+    <div class="features-grid">
+      <a href="learn.html" class="feature-card reveal" >
+        <div class="feature-card__icon feature-card__icon--cyan"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg></div>
+        <h3 class="feature-card__title" data-i18n="feat1_title">محتوى تعليمي تفاعلي</h3>
+        <p class="feature-card__desc" data-i18n="feat1_desc">
+          شرح مفصل لكل بوابة منطقية مع جداول الحقيقة والرموز الكهربائية، وأمثلة تفاعلية حية يمكنك التحكم فيها.
+        </p>
+      </a>
+      <a href="simulator.html" class="feature-card reveal" >
+        <div class="feature-card__icon feature-card__icon--purple"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+        <h3 class="feature-card__title" data-i18n="feat2_title">محاكي الدوائر</h3>
+        <p class="feature-card__desc" data-i18n="feat2_desc">
+          صمم دوائرك الرقمية من خلال سحب وإفلات البوابات المنطقية وتوصيلها ببعضها. شاهد الإشارات تنتقل في الوقت الحقيقي.
+        </p>
+      </a>
+      <a href="ar.html" class="feature-card reveal" >
+        <div class="feature-card__icon feature-card__icon--green"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+        <h3 class="feature-card__title" data-i18n="feat3_title">تجربة الواقع المعزز</h3>
+        <p class="feature-card__desc" data-i18n="feat3_desc">
+          وجّه كاميرا هاتفك نحو العلامات المطبوعة وشاهد البوابات المنطقية تظهر أمامك كمجسمات ثلاثية الأبعاد مع شرح تفاعلي.
+        </p>
+      </a>
+      <a href="markers.html" class="feature-card reveal" >
+        <div class="feature-card__icon feature-card__icon--orange"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg></div>
+        <h3 class="feature-card__title" data-i18n="feat4_title">علامات قابلة للطباعة</h3>
+        <p class="feature-card__desc" data-i18n="feat4_desc">
+          اطبع مجموعة العلامات الخاصة بكل بوابة منطقية واستخدمها في تجربة الواقع المعزز. سهلة الطباعة والاستخدام.
+        </p>
+      </a>
+    </div>
+  </section>
 
-            <section class="card table-card">
-                <h2>Truth Table</h2>
-                <table id="truthTable" class="truth-table">
-                    <thead>
-                        <tr><th>Input-1</th><th>Input-2</th><th>Output</th></tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </section>
+  <!-- Gates Preview Section -->
+  <section class="section" id="gates-preview">
+    <div class="section__header reveal">
+      <span class="section__tag" data-i18n="gates_tag">البوابات المنطقية</span>
+      <h2 class="section__title" data-i18n="gates_title">٧ بوابات أساسية</h2>
+      <p class="section__desc" data-i18n="gates_desc">تعرّف على البوابات المنطقية الأساسية المستخدمة في بناء الدوائر الرقمية</p>
+    </div>
+    <div class="gates-preview-list reveal">
+      <div class="gates-chips-container">
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-cyan);">AND</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_and">بوابة "و"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-purple);">OR</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_or">بوابة "أو"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-green);">NOT</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_not">بوابة "النفي"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-yellow);">NAND</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_nand">بوابة "نفي و"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-orange);">NOR</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_nor">بوابة "نفي أو"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:var(--accent-red);">XOR</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_xor">بوابة "حصري أو"</span>
+  </div>
+  <div class="gate-preview-chip">
+    <span class="gate-preview-chip__name" style="color:#ff69b4;">XNOR</span>
+    <span class="gate-preview-chip__label" data-i18n="gate_xnor">بوابة "تكافؤ"</span>
+  </div>
+</div>
+    </div>
+    <div class="text-center mt-4 reveal">
+      <a href="learn.html" class="btn btn--primary" data-i18n="btn_discover_gates">اكتشف كل بوابة بالتفصيل &larr;</a>
+    </div>
+  </section>
 
-        </main>
+  <!-- How it Works Section -->
+  <section class="section" id="how-it-works">
+    <div class="section__header reveal">
+      <span class="section__tag" data-i18n="steps_tag">كيف تعمل</span>
+      <h2 class="section__title" data-i18n="steps_title">خطوات بسيطة للبدء</h2>
+    </div>
+    <div class="ar-steps reveal" style="max-width:900px; margin:0 auto;">
+      <div class="ar-step">
+        <div class="ar-step__num">١</div>
+        <h4 data-i18n="step1_title">تعلّم النظرية</h4>
+        <p class="ar-step__text" data-i18n="step1_desc">ابدأ بقراءة شرح كل بوابة منطقية وفهم جداول الحقيقة</p>
+      </div>
+      <div class="ar-step">
+        <div class="ar-step__num">٢</div>
+        <h4 data-i18n="step2_title">جرّب المحاكي</h4>
+        <p class="ar-step__text" data-i18n="step2_desc">صمم دوائرك الخاصة في المحاكي التفاعلي وشاهد النتائج</p>
+      </div>
+      <div class="ar-step">
+        <div class="ar-step__num">٣</div>
+        <h4 data-i18n="step3_title">اطبع العلامات</h4>
+        <p class="ar-step__text" data-i18n="step3_desc">حمّل واطبع علامات الواقع المعزز الخاصة بكل بوابة</p>
+      </div>
+      <div class="ar-step">
+        <div class="ar-step__num">٤</div>
+        <h4 data-i18n="step4_title">شاهد بالـ AR</h4>
+        <p class="ar-step__text" data-i18n="step4_desc">وجّه الكاميرا نحو العلامات وشاهد المجسمات ثلاثية الأبعاد</p>
+      </div>
+    </div>
+  </section>
 
-        <script src="script.js"></script>
-    </body>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
+    <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
+    <div class="footer__links">
+      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+    </div>
+    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    document.querySelectorAll('.gate-preview-chip').forEach((chip, i) => {
+      chip.classList.add('reveal', `reveal-delay-${i + 1}`);
+      revealObserver.observe(chip);
+    });
+
+    document.querySelectorAll('.feature-card').forEach((card, i) => {
+      card.classList.add(`reveal-delay-${i + 1}`);
+    });
+
+    document.querySelectorAll('.ar-step').forEach((step, i) => {
+      step.classList.add(`reveal-delay-${i + 1}`);
+    });
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(6, 6, 20, 0.95)';
+      } else {
+        navbar.style.background = 'rgba(6, 6, 20, 0.85)';
+      }
+    });
+
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+        card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+      });
+    });
+  </script>
+  <script src="js/i18n.js"></script>
+</body>
 </html>
