@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a href="#circuitsGrid" class="skip-link">Skip to content</a>
   <div class="bg-grid"></div>
   <div class="bg-glow bg-glow--cyan"></div>
   <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-grain"></div>
  <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar__logo">
@@ -28,15 +30,15 @@
       <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
       <a href="markers.html" data-i18n="nav_markers">العلامات</a>
     </div>
-     <div class="navbar__lang" style="display: flex; gap: 8px; margin-inline-start: auto; margin-inline-end: 16px;">
-      <button class="lang-btn" data-lang="en" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">EN</button>
-      <button class="lang-btn" data-lang="ar" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">عربي</button>
-    </div>
+     <div class="navbar__lang">
+       <button class="lang-btn" data-lang="en">EN</button>
+       <button class="lang-btn" data-lang="ar">عربي</button>
+     </div>
     <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
   </nav>
-  <main style="margin-top:72px; padding-bottom:80px; position:relative; z-index:1;">
+  <main class="main-content">
     <!-- Page Header -->
-    <section class="section" style="padding-bottom:40px;">
+    <section class="section">
       <div class="section__header">
         <span class="section__tag" data-i18n="comb_content_tag">وحدة تعليمية</span>
         <h1 class="section__title" data-i18n="comb_main_title">الدوائر التوافقية (Combinational)</h1>
@@ -59,8 +61,15 @@
   </main>
 
   <footer class="footer">
+    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
     <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <p class="mt-1" style="color:var(--text-muted);" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
+    <div class="footer__links">
+      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+    </div>
+    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
   </footer>
 
   <script>
@@ -278,14 +287,14 @@
           <p class="gate-card__desc gate-dynamic-desc" data-gate-id="${circuit.id}"></p>
           <div class="gate-card__formula">${circuit.formula}</div>
 
-          <h4 style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px;" data-i18n="truth_table_title">جدول الحقيقة</h4>
+          <h4 class="gate-card__section-label" data-i18n="truth_table_title">جدول الحقيقة</h4>
           <table class="truth-table">
             <thead>${tableHeader}</thead>
             <tbody>${tableRows}</tbody>
           </table>
 
           <div class="gate-demo">
-            <div class="gate-demo__title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 8px;"><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg> <span data-i18n="try_yourself">جرّب بنفسك</span></div>
+            <div class="gate-demo__title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg> <span data-i18n="try_yourself">جرّب بنفسك</span></div>
             <div class="gate-demo__circuit">
               ${demoHTML}
             </div>
@@ -360,6 +369,9 @@
     // Nav toggle
     document.getElementById('navToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.getElementById('navLinks').querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
 
     // Scroll reveal

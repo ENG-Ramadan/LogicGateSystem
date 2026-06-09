@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a href="#gatesGrid" class="skip-link">Skip to content</a>
   <div class="bg-grid"></div>
   <div class="bg-glow bg-glow--cyan"></div>
   <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-grain"></div>
  <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar__logo">
@@ -28,16 +30,16 @@
       <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
       <a href="markers.html" data-i18n="nav_markers">العلامات</a>
     </div>
-     <div class="navbar__lang" style="display: flex; gap: 8px; margin-inline-start: auto; margin-inline-end: 16px;">
-      <button class="lang-btn" data-lang="en" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">EN</button>
-      <button class="lang-btn" data-lang="ar" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">عربي</button>
-    </div>
+     <div class="navbar__lang">
+       <button class="lang-btn" data-lang="en">EN</button>
+       <button class="lang-btn" data-lang="ar">عربي</button>
+     </div>
     <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
   </nav>
 
-  <main style="margin-top:72px; padding-bottom:80px; position:relative; z-index:1;">
+  <main class="main-content">
     <!-- Page Header -->
-    <section class="section" style="padding-bottom:40px;">
+    <section class="section">
       <div class="section__header">
         <span class="section__tag" data-i18n="learn_content_tag">المحتوى التعليمي</span>
         <h1 class="section__title" data-i18n="learn_main_title">البوابات المنطقية الأساسية</h1>
@@ -48,8 +50,8 @@
     </section>
 
     <!-- Introduction -->
-    <section class="container" style="margin-bottom:60px;">
-      <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:32px; max-width:900px; margin:0 auto;">
+    <section class="container">
+      <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:32px; margin:0 auto;">
         <h2 style="font-size:1.3rem; margin-bottom:12px;" data-i18n="what_is_gate_title">ما هي البوابات المنطقية؟</h2>
         <p style="color:var(--text-secondary); line-height:2;" data-i18n="what_is_gate_desc">
           البوابات المنطقية (Logic Gates) هي الوحدات الأساسية لبناء الدوائر الرقمية. تقوم كل بوابة بتنفيذ عملية منطقية
@@ -68,14 +70,14 @@
     </section>
 
     <!-- Circuits Section -->
-    <section class="section" style="margin-top:40px;">
+    <section class="section">
       <div class="section__header reveal">
         <span class="section__tag" data-i18n="apps_tag">تطبيقات</span>
         <h2 class="section__title" data-i18n="apps_title">أمثلة على دوائر مركبة</h2>
         <p class="section__desc" data-i18n="apps_desc">يمكن تركيب البوابات المنطقية معاً لبناء دوائر أكثر تعقيداً</p>
       </div>
       <div class="container">
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:24px; max-width:1000px; margin:0 auto;">
+        <div class="circuits-grid">
           <div class="reveal" style="background:var(--bg-card); border:var(--border-subtle); border-radius:var(--radius-lg); padding:28px;">
             <h3 style="font-family:var(--font-mono); color:var(--accent-cyan); margin-bottom:12px;" data-i18n="half_adder_title">نصف الجامع (Half Adder)</h3>
             <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px; line-height:1.8;" data-i18n="half_adder_desc">
@@ -107,8 +109,14 @@
   </main>
 
   <footer class="footer">
+    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
     <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <p class="mt-1" style="color:var(--text-muted);" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
+    <div class="footer__links">
+      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+    </div>
+    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
   </footer>
 
   <script>
@@ -315,7 +323,7 @@
 
           <!-- Truth Table -->
 
-          <h4 style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px;" data-i18n="truth_table_title">جدول الحقيقة</h4>
+          <h4 class="gate-card__section-label" data-i18n="truth_table_title">جدول الحقيقة</h4>
           <table class="truth-table">
             <thead>${tableHeader}</thead>
             <tbody>${tableRows}</tbody>
@@ -324,7 +332,7 @@
           <!-- Interactive Demo -->
           
           <div class="gate-demo">
-            <div class="gate-demo__title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 8px;"><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg> <span data-i18n="try_yourself">جرّب بنفسك</span></div>
+            <div class="gate-demo__title"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg> <span data-i18n="try_yourself">جرّب بنفسك</span></div>
             <div class="gate-demo__circuit">
               ${demoInputsHTML}
               <div class="gate-demo__arrow">→</div>
@@ -395,6 +403,9 @@
     // Nav toggle
     document.getElementById('navToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.getElementById('navLinks').querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
 
     // Scroll reveal

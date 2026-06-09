@@ -1,90 +1,130 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_kmap_title">خريطة كارنوف — LogicAR</title>
-  <meta name="description" content="محاكي تفاعلي لخرائط كارنوف لتبسيط المعادلات المنطقية">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <!-- Background Effects -->
-  <div class="bg-grid"></div>
-  <div class="bg-glow bg-glow--purple"></div>
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <div class="navbar__logo">
-      <div class="navbar__logo-icon" style="display:flex;align-items:center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00f0ff" /><stop offset="100%" stop-color="#8a2be2" /></linearGradient></defs><path d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z" stroke="url(#logoGrad)"></path><path d="M1 9h3" stroke="#00f0ff"></path><path d="M1 15h3" stroke="#00f0ff"></path><path d="M17 12h6" stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5" fill="#00f0ff" stroke="none"></circle></svg></div>
-      <span>Logic<span class="text-gradient">AR</span></span>
-    </div>
-   
-    <div class="navbar__links" id="navLinks">
-      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
-      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
-      <a href="combinational.html" data-i18n="nav_combinational">دوائر توافقية</a>
-      <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
-      <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
-      <a href="kmap.html"class="active"  data-i18n="nav_kmap">خريطة كارنوف</a>
-      <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
-      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
-    </div>
-     <div class="navbar__lang" style="display: flex; gap: 8px; margin-inline-start: auto; margin-inline-end: 16px;">
-      <button class="lang-btn" data-lang="en" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">EN</button>
-      <button class="lang-btn" data-lang="ar" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">عربي</button>
-    </div>
-    <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
-  </nav>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_kmap_title">خريطة كارنوف — LogicAR</title>
+    <meta name="description"
+      content="محاكي تفاعلي لخرائط كارنوف لتبسيط المعادلات المنطقية">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <a href="#kmapWrapper" class="skip-link">Skip to content</a>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow--purple"></div>
+    <div class="bg-grain"></div>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="navbar__logo">
+        <div class="navbar__logo-icon"
+          style="display:flex;align-items:center;"><svg width="28" height="28"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"><defs><lineargradient id="logoGrad" x1="0%"
+                y1="0%" x2="100%" y2="100%"><stop offset="0%"
+                  stop-color="#00f0ff" /><stop offset="100%"
+                  stop-color="#8a2be2" /></lineargradient></defs><path
+              d="M4 5h6a7 7 0 0 1 7 7v0a7 7 0 0 1-7 7H4V5z"
+              stroke="url(#logoGrad)"></path><path d="M1 9h3"
+              stroke="#00f0ff"></path><path d="M1 15h3"
+              stroke="#00f0ff"></path><path d="M17 12h6"
+              stroke="#8a2be2"></path><circle cx="9" cy="12" r="1.5"
+              fill="#00f0ff" stroke="none"></circle></svg></div>
+        <span>Logic<span class="text-gradient">AR</span></span>
+      </div>
 
-  <section class="section" style="padding-top: 140px; min-height: 100vh;">
-    <div class="section__header reveal">
-      <span class="section__tag" data-i18n="kmap_content_tag">محاكي متقدم</span>
-      <h2 class="section__title" data-i18n="kmap_main_title">خريطة كارنوف (K-Map)</h2>
-      <p class="section__desc" data-i18n="kmap_main_desc">
-        استخدم خريطة كارنوف لتبسيط المعادلات المنطقية. أدخل قيم جدول الحقيقة وسيتم استخراج المعادلة المبسطة تلقائياً.
-      </p>
-    </div>
+      <div class="navbar__links" id="navLinks">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="combinational.html" data-i18n="nav_combinational">دوائر
+          توافقية</a>
+        <a href="sequential.html" data-i18n="nav_sequential">دوائر تعاقبية</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="kmap.html" class="active" data-i18n="nav_kmap">خريطة كارنوف</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
+        <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+      </div>
+      <div class="navbar__lang">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+      </div>
+      <button class="navbar__toggle" id="navToggle"
+        aria-label="القائمة">☰</button>
+    </nav>
 
-    <div class="kmap-container reveal">
-      <!-- Input Panel -->
-      <div class="kmap-panel">
-        <h3 class="kmap-panel__title" data-i18n="kmap_panel_tt">جدول الحقيقة</h3>
-        <div class="vars-selector">
-          <button class="vars-btn" onclick="setVars(2)" data-i18n="btn_2_vars">متغيرين</button>
-          <button class="vars-btn active" onclick="setVars(3)" data-i18n="btn_3_vars">٣ متغيرات</button>
-          <button class="vars-btn" onclick="setVars(4)" data-i18n="btn_4_vars">٤ متغيرات</button>
+    <section class="section" style="padding-top: 140px; min-height: 100dvh;">
+      <div class="section__header reveal">
+        <span class="section__tag" data-i18n="kmap_content_tag">محاكي
+          متقدم</span>
+        <h2 class="section__title" data-i18n="kmap_main_title">خريطة كارنوف
+          (K-Map)</h2>
+        <p class="section__desc" data-i18n="kmap_main_desc">
+          استخدم خريطة كارنوف لتبسيط المعادلات المنطقية. أدخل قيم جدول الحقيقة
+          وسيتم استخراج المعادلة المبسطة تلقائياً.
+        </p>
+      </div>
+
+      <div class="kmap-container reveal">
+        <!-- Input Panel -->
+        <div class="kmap-panel">
+          <h3 class="kmap-panel__title" data-i18n="kmap_panel_tt">جدول
+            الحقيقة</h3>
+          <div class="vars-selector">
+            <button class="vars-btn active" onclick="setVars(2)"
+              data-i18n="btn_2_vars">متغيرين</button>
+            <button class="vars-btn " onclick="setVars(3)"
+              data-i18n="btn_3_vars">٣ متغيرات</button>
+            <button class="vars-btn" onclick="setVars(4)"
+              data-i18n="btn_4_vars">٤ متغيرات</button>
+          </div>
+          <div style="max-height: 400px; overflow-y: auto; padding-right: 5px;">
+            <table class="tt-table" id="ttTable">
+              <!-- Populated by JS -->
+            </table>
+          </div>
         </div>
-        <div style="max-height: 400px; overflow-y: auto; padding-right: 5px;">
-          <table class="tt-table" id="ttTable">
+
+        <!-- K-Map Panel -->
+        <div class="kmap-panel">
+          <h3 class="kmap-panel__title" data-i18n="kmap_panel_map">الخريطة
+            والمعادلة</h3>
+          <div class="kmap-grid-wrapper" id="kmapWrapper">
             <!-- Populated by JS -->
-          </table>
+          </div>
+
+          <div class="expression-box">
+            <div class="expression-label"
+              data-i18n="kmap_expression_label">المعادلة المبسطة (SOP)</div>
+            <div class="expression-value" id="expressionOutput">F = 0</div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- K-Map Panel -->
-      <div class="kmap-panel">
-        <h3 class="kmap-panel__title" data-i18n="kmap_panel_map">الخريطة والمعادلة</h3>
-        <div class="kmap-grid-wrapper" id="kmapWrapper">
-          <!-- Populated by JS -->
-        </div>
-        
-        <div class="expression-box">
-          <div class="expression-label" data-i18n="kmap_expression_label">المعادلة المبسطة (SOP)</div>
-          <div class="expression-value" id="expressionOutput">F = 0</div>
-        </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__brand">Logic<span
+          class="text-gradient">AR</span></div>
+      <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات
+        المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
+      <div class="footer__links">
+        <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+        <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+        <a href="simulator.html" data-i18n="nav_simulator">المحاكي</a>
+        <a href="ar.html" data-i18n="nav_ar">الواقع المعزز</a>
       </div>
-    </div>
-  </section>
+      <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي ©
+        ٢٠٢٦</p>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="footer" style="text-align: center; padding: 40px; border-top: var(--border-subtle); margin-top: 60px;">
-    <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <p class="mt-1" style="color:var(--text-muted);" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
-  </footer>
-
-  <script>
+    <script>
     // Navbar toggle
     document.getElementById('navToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.getElementById('navLinks').querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
 
     // Reveal animations
@@ -96,16 +136,16 @@
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
     // K-Map Logic
-    let numVars = 3;
+    let numVars = 2;
     let truthTable = []; // Array of 0, 1, or 'X'
-
     const varNames = ['A', 'B', 'C', 'D'];
 
+    //بناء جدول الحقيقة بناءً على عدد المتغيرات
     function initTruthTable() {
       const rows = Math.pow(2, numVars);
       truthTable = new Array(rows).fill(0);
     }
-
+    // تغيير عدد المتغيرات وإعادة بناء الجدول
     function setVars(n) {
       numVars = n;
       document.querySelectorAll('.vars-btn').forEach(btn => btn.classList.remove('active'));
@@ -113,7 +153,7 @@
       initTruthTable();
       renderAll();
     }
-
+    // تبديل القيمة عند النقر على الخلية[0 then 1 then X then back to 0]
     function toggleValue(index) {
       const current = truthTable[index];
       if (current === 0) truthTable[index] = 1;
@@ -318,6 +358,6 @@
     initTruthTable();
     renderAll();
   </script>
-  <script src="js/i18n.js"></script>
-</body>
+    <script src="js/i18n.js"></script>
+  </body>
 </html>

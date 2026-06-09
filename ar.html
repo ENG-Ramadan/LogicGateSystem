@@ -8,9 +8,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <a href="#arInstructions" class="skip-link">Skip to content</a>
   <div class="bg-grid"></div>
   <div class="bg-glow bg-glow--cyan"></div>
   <div class="bg-glow bg-glow--purple"></div>
+  <div class="bg-grain"></div>
  <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="navbar__logo">
@@ -28,10 +30,10 @@
       <a href="ar.html" class="active" data-i18n="nav_ar">الواقع المعزز</a>
       <a href="markers.html" data-i18n="nav_markers">العلامات</a>
     </div>
-     <div class="navbar__lang" style="display: flex; gap: 8px; margin-inline-start: auto; margin-inline-end: 16px;">
-      <button class="lang-btn" data-lang="en" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">EN</button>
-      <button class="lang-btn" data-lang="ar" style="background:none; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:2px 6px; cursor:pointer; font-size:0.8rem;">عربي</button>
-    </div>
+     <div class="navbar__lang">
+       <button class="lang-btn" data-lang="en">EN</button>
+       <button class="lang-btn" data-lang="ar">عربي</button>
+     </div>
     <button class="navbar__toggle" id="navToggle" aria-label="القائمة">☰</button>
   </nav>
   <!-- AR Instructions -->
@@ -108,9 +110,15 @@
     </div>
   </div>
 
-  <footer class="footer" style="position:relative; z-index:1;">
+  <footer class="footer">
+    <div class="footer__brand">Logic<span class="text-gradient">AR</span></div>
     <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات المنطقية والدوائر الكهربائية بتقنية الواقع المعزز</p>
-    <p class="mt-1" style="color:var(--text-muted);" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
+    <div class="footer__links">
+      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+      <a href="learn.html" data-i18n="nav_learn">تعلّم</a>
+      <a href="markers.html" data-i18n="nav_markers">العلامات</a>
+    </div>
+    <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي © ٢٠٢٦</p>
   </footer>
 
   <script>
@@ -272,6 +280,9 @@
     // Nav toggle
     document.getElementById('navToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
+    });
+    document.getElementById('navLinks').querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
     });
     // Re-render AR model text when language changes (if AR is active)
     document.documentElement.addEventListener('languageChanged', (e) => {

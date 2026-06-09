@@ -135,6 +135,16 @@ const translations = {
     sim_info_curr_val: "القيمة الحالية:",
     sim_info_inputs: "المدخلات:",
     sim_info_output: "المخرج:",
+    sim_tab_info: "معلومات العنصر",
+    sim_tab_results: "نتائج الدائرة",
+    sim_results_summary: "الملخص الحي",
+    sim_results_inputs: "المدخلات",
+    sim_results_outputs: "المخرجات",
+    sim_results_truth_table: "جدول الحقيقة الكامل",
+    sim_results_expression: "المعادلة المنطقية",
+    sim_results_no_circuit: "أضف مدخلات ومخرجات وبوابات لبناء دائرة",
+    sim_results_no_outputs: "أضف مخرج واحد على الأقل (OUT)",
+    sim_results_disconnected: "غير متصل",
 
     // K-Map Page
     page_kmap_title: "خريطة كارنوف — LogicAR",
@@ -314,6 +324,16 @@ const translations = {
     sim_info_curr_val: "Current Value:",
     sim_info_inputs: "Inputs:",
     sim_info_output: "Output:",
+    sim_tab_info: "Element Info",
+    sim_tab_results: "Circuit Results",
+    sim_results_summary: "Live Summary",
+    sim_results_inputs: "Inputs",
+    sim_results_outputs: "Outputs",
+    sim_results_truth_table: "Full Truth Table",
+    sim_results_expression: "Boolean Expression",
+    sim_results_no_circuit: "Add inputs, outputs, and gates to build a circuit",
+    sim_results_no_outputs: "Add at least one output (OUT)",
+    sim_results_disconnected: "Disconnected",
 
     // K-Map Page
     page_kmap_title: "Karnaugh Map — LogicAR",
@@ -360,7 +380,7 @@ const translations = {
 };
 
 function setLanguage(lang) {
-  // Save preference
+  window.currentLang = lang;
   localStorage.setItem('logicAR_lang', lang);
 
   // Update HTML attributes
