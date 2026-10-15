@@ -363,7 +363,9 @@ a:focus-visible,
   position: relative;
   overflow: hidden;
 }
-
+.btn-close{
+  
+}
 .btn::before {
   content: "";
   position: absolute;
