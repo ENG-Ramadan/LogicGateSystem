@@ -188,13 +188,11 @@
       if (!window.AFRAME) {
         const btn = document.getElementById('startArBtn');
         const lang = window.currentLang || 'ar';
-        btn.textContent = window.translations[lang]?.loading_cam || '⏳ جاري التحميل...';
         btn.disabled = true;
 
         await loadScript('https://aframe.io/releases/1.4.0/aframe.min.js');
         await loadScript('https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js');
 
-        btn.textContent = window.translations[lang]?.btn_start_cam || '📷 ابدأ الكاميرا';
         btn.disabled = false;
       }
 
