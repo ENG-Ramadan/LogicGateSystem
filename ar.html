@@ -229,7 +229,10 @@
             metalness: 0.3,
             roughness: 0.28,
             emissive: color,
-            emissiveIntensity: 0.12
+            emissiveIntensity: 0.12,
+            transparent: false,
+            opacity: 1,
+            side: THREE.DoubleSide
           });
 
           this.mesh = new THREE.Mesh(geometry, material);
