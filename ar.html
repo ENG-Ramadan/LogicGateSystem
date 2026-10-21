@@ -314,9 +314,7 @@
           embedded
           arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
           vr-mode-ui="enabled: false"
-          renderer="logarithmicDepthBuffer: true; precision: medium;"
-          style="position:fixed; inset:0; z-index:999;"
-        >
+          renderer="logarithmicDepthBuffer: true; precision: medium;">
           <a-marker type="barcode" value="0" smooth="true" smoothCount="5">
             ${gateModel}
           </a-marker>
@@ -364,8 +362,8 @@
         </a-entity>
 
         <!-- Input terminals -->
-        ${input(0.75, "A", "#00d4ff")}
-        ${isNot ? "" : input(0.35, "B", "#8b5cf6")}
+        ${input(0.75, "A", "#ddd")}
+        ${isNot ? "" : input(0.35, "B", "#ddd")}
 
         <!-- Inversion bubble -->
         ${inverted ? `
@@ -380,7 +378,7 @@
         <a-cylinder
           position="${inverted ? 0.91 : 0.78} 0.55 0"
           radius="0.025" height="0.48"
-          rotation="0 0 90" color="#00ff88">
+          rotation="0 0 90" color="#000000">
         </a-cylinder>
 
         <a-sphere
@@ -417,8 +415,7 @@
 
         <!-- Base -->
         <a-box position="0 -0.65 0"
-          width="2.8" height="0.05" depth="0.9"
-          color="#151b36">
+          width="3" height="0.05" depth="0.9">
         </a-box>
       `;
     }
