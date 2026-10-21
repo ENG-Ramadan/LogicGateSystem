@@ -174,6 +174,114 @@
       XOR:  { color: '#ff3366', nameAr: 'بوابة "حصري أو"', nameEn: 'XOR Gate', formula: 'Y = A ⊕ B', desc: 'تُخرج 1 عندما يختلف المدخلان', descEn: 'Outputs 1 when inputs differ' },
       XNOR: { color: '#ff69b4', nameAr: 'بوابة "التكافؤ"', nameEn: 'XNOR Gate', formula: 'Y = (A⊕B)̄', desc: 'تُخرج 1 عندما يتساوى المدخلان', descEn: 'Outputs 1 when inputs are equal' },
     };
+    
+    function registerGateShapes() {
+      if (AFRAME.components["gate-shape"]) return;
+
+      AFRAME.registerComponent("gate-shape", {
+        schema: {
+          type: { type: "string", default: "AND" },
+          color: { type: "color", default: "#00d4ff" }
+        },
+
+        init: function () {
+          const { type, color } = this.data;
+          const THREE = AFRAME.THREE;
+
+          const shape = new THREE.Shape();
+
+          // Standard logic gate outlines, drawn in the XY plane.
+          if (type === "AND" || type === "NAND") {
+            shape.moveTo(-0.55, -0.4);
+            shape.lineTo(0, -0.4);
+            shape.absarc(0, 0, 0.4, -Math.PI / 2, Math.PI / 2, false);
+            shape.lineTo(-0.55, 0.4);
+            shape.closePath();
+
+          } else if (["OR", "NOR", "XOR", "XNOR"].includes(type)) {
+            shape.moveTo(-0.55, -0.4);
+            shape.bezierCurveTo(-0.2, -0.4, 0.2, -0.22, 0.62, 0);
+            shape.bezierCurveTo(0.2, 0.22, -0.2, 0.4, -0.55, 0.4);
+            shape.bezierCurveTo(-0.28, 0.16, -0.28, -0.16, -0.55, -0.4);
+            shape.closePath();
+
+          } else if (type === "NOT") {
+            shape.moveTo(-0.5, -0.4);
+            shape.lineTo(0.4, 0);
+            shape.lineTo(-0.5, 0.4);
+            shape.closePath();
+          }
+
+          const geometry = new THREE.ExtrudeGeometry(shape, {
+            depth: 0.22,
+            bevelEnabled: true,
+            bevelSegments: 3,
+            steps: 1,
+            bevelSize: 0.025,
+            bevelThickness: 0.025,
+            curveSegments: 24
+          });
+
+          geometry.translate(0, 0, -0.11);
+
+          const material = new THREE.MeshStandardMaterial({
+            color: color,
+            metalness: 0.3,
+            roughness: 0.28,
+            emissive: color,
+            emissiveIntensity: 0.12
+          });
+
+          this.mesh = new THREE.Mesh(geometry, material);
+          this.mesh.castShadow = true;
+          this.mesh.receiveShadow = true;
+          this.el.object3D.add(this.mesh);
+
+          // Extra curved line distinguishes XOR and XNOR.
+          if (type === "XOR" || type === "XNOR") {
+            const points = [];
+
+            for (let i = 0; i <= 24; i++) {
+              const t = i / 24;
+              const x = -0.69 + 0.27 * t;
+              const y = -0.4 + 0.8 * t;
+              points.push(new THREE.Vector3(x, y, 0.02));
+            }
+
+            const curve = new THREE.CatmullRomCurve3(points);
+            const lineGeometry = new THREE.TubeGeometry(
+              curve, 32, 0.018, 8, false
+            );
+
+            const lineMaterial = new THREE.MeshStandardMaterial({
+              color: color,
+              emissive: color,
+              emissiveIntensity: 0.3
+            });
+
+            this.extraLine = new THREE.Mesh(
+              lineGeometry, lineMaterial
+            );
+
+            this.el.object3D.add(this.extraLine);
+          }
+        },
+
+        remove: function () {
+          this.el.object3D.traverse(obj => {
+            if (obj.geometry) obj.geometry.dispose();
+
+            if (obj.material) {
+              if (Array.isArray(obj.material)) {
+                obj.material.forEach(m => m.dispose());
+              } else {
+                obj.material.dispose();
+              }
+            }
+          });
+        }
+      });
+    }
 
     function selectGate(el, gate) {
       selectedGate = gate;
@@ -191,6 +299,7 @@
 
         await loadScript('https://aframe.io/releases/1.4.0/aframe.min.js');
         await loadScript('https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js');
+        registerGateShapes();
         btn.disabled = false;
       }
 
@@ -220,154 +329,99 @@
       arActive = true;
     }
 
-function buildGateModel(type, info) {
-  const color = info.color;
 
-  // Truth table for each logic gate
-  const truthTables = {
-    AND:  [["0","0","0"],["0","1","0"],["1","0","0"],["1","1","1"]],
-    OR:   [["0","0","0"],["0","1","1"],["1","0","1"],["1","1","1"]],
-    NOT:  [["0","-","1"],["1","-","0"]],
-    NAND: [["0","0","1"],["0","1","1"],["1","0","1"],["1","1","0"]],
-    NOR:  [["0","0","1"],["0","1","0"],["1","0","0"],["1","1","0"]],
-    XOR:  [["0","0","0"],["0","1","1"],["1","0","1"],["1","1","0"]],
-    XNOR: [["0","0","1"],["0","1","0"],["1","0","0"],["1","1","1"]]
-  };
+    function buildGateModel(type, info) {
+      const color = info.color;
+      const isNot = type === "NOT";
+      const inverted = ["NOT", "NAND", "NOR", "XNOR"].includes(type);
+      const en = window.currentLang === "en";
 
-  const rows = truthTables[type] || truthTables.AND;
-  const isNot = type === "NOT";
-  const inverted = ["NOT", "NAND", "NOR", "XNOR"].includes(type);
-  const lang = window.currentLang === "en" ? "en" : "ar";
+      const name = en ? info.nameEn : info.nameAr;
+      const desc = en ? info.descEn : info.desc;
 
-  // Circuit input wires and labels
-  const inputA = `
-    <a-cylinder position="-0.85 0.65 0"
-      radius="0.025" height="0.65"
-      rotation="0 0 90" color="#00d4ff"></a-cylinder>
-    <a-sphere position="-1.18 0.65 0"
-      radius="0.07" color="#00d4ff"
-      material="emissive: #00d4ff; emissiveIntensity: 0.7"></a-sphere>
-    <a-text value="A" position="-1.18 0.82 0"
-      align="center" color="#ffffff" width="1.2"></a-text>
-  `;
+      const input = (y, label, wireColor) => `
+        <a-cylinder
+          position="-0.85 ${y} 0"
+          radius="0.025" height="0.5"
+          rotation="0 0 90" color="${wireColor}">
+        </a-cylinder>
 
-  const inputB = isNot ? "" : `
-    <a-cylinder position="-0.85 0.35 0"
-      radius="0.025" height="0.65"
-      rotation="0 0 90" color="#8b5cf6"></a-cylinder>
-    <a-sphere position="-1.18 0.35 0"
-      radius="0.07" color="#8b5cf6"
-      material="emissive: #8b5cf6; emissiveIntensity: 0.7"></a-sphere>
-    <a-text value="B" position="-1.18 0.18 0"
-      align="center" color="#ffffff" width="1.2"></a-text>
-  `;
+        <a-sphere position="-1.12 ${y} 0"
+          radius="0.055" color="${wireColor}">
+        </a-sphere>
 
-  const output = `
-    <a-cylinder position="0.88 0.5 0"
-      radius="0.03" height="0.55"
-      rotation="0 0 90" color="#00ff88"></a-cylinder>
-    <a-sphere position="1.18 0.5 0"
-      radius="0.09" color="#00ff88"
-      material="emissive: #00ff88; emissiveIntensity: 1"
-      animation="property: scale; to: 1.2 1.2 1.2;
-        dir: alternate; loop: true; dur: 800"></a-sphere>
-    <a-text value="Y" position="1.18 0.7 0"
-      align="center" color="#00ff88" width="1.2"></a-text>
-  `;
+        <a-text value="${label}"
+          position="-1.12 ${y + 0.15} 0"
+          align="center" color="#ffffff" width="1.2">
+        </a-text>
+      `;
 
-  // Main 3D logic-gate chip
-  const chip = `
-    <a-box position="0 0.5 0"
-      width="1.25" height="0.72" depth="0.7"
-      color="${color}" material="metalness: 0.45; roughness: 0.25"
-      animation="property: rotation; to: 0 360 0;
-        loop: true; dur: 18000; easing: linear">
-    </a-box>
+      return `
+        <!-- 3D gate body -->
+        <a-entity
+          gate-shape="type: ${type}; color: ${color}"
+          position="0 0.55 0">
+        </a-entity>
 
-    <a-box position="0 0.5 0.36"
-      width="1.12" height="0.59" depth="0.025"
-      color="#10152b" material="roughness: 0.4">
-    </a-box>
+        <!-- Input terminals -->
+        ${input(0.75, "A", "#00d4ff")}
+        ${isNot ? "" : input(0.35, "B", "#8b5cf6")}
 
-    <a-text value="${type}" position="0 0.55 0.39"
-      align="center" anchor="center"
-      color="${color}" width="3.5"
-      font="mozillavr">
-    </a-text>
+        <!-- Inversion bubble -->
+        ${inverted ? `
+          <a-sphere position="${type === "NOT" ? 0.49 : 0.69} 0.55 0"
+            radius="0.075"
+            color="#ffffff"
+            material="metalness: 0.1; roughness: 0.2">
+          </a-sphere>
+        ` : ""}
 
-    <a-text value="${info.formula}"
-      position="0 0.27 0.4" align="center"
-      color="#ffffff" width="2.8">
-    </a-text>
+        <!-- Output terminal -->
+        <a-cylinder
+          position="${inverted ? 0.91 : 0.78} 0.55 0"
+          radius="0.025" height="0.48"
+          rotation="0 0 90" color="#00ff88">
+        </a-cylinder>
 
-    ${inverted ? `
-      <a-sphere position="0.72 0.5 0"
-        radius="0.09" color="${color}"
-        material="emissive: ${color}; emissiveIntensity: 0.6">
-      </a-sphere>
-    ` : ""}
-  `;
+        <a-sphere
+          position="${inverted ? 1.15 : 1.02} 0.55 0"
+          radius="0.065" color="#00ff88"
+          material="emissive: #00ff88; emissiveIntensity: 0.8">
+        </a-sphere>
 
-  // Floating information panel with truth table
-  const tableRows = rows.map((r, i) => `
-    <a-text value="${r.join("     ")}"
-      position="0 ${0.48 - i * 0.17} 0.02"
-      align="center" color="${r[2] === "1" ? "#00ff88" : "#d1d5e8"}"
-      width="2.5">
-    </a-text>
-  `).join("");
+        <a-text value="Y"
+          position="${inverted ? 1.15 : 1.02} 0.72 0"
+          align="center" color="#00ff88" width="1.2">
+        </a-text>
 
-  const tableHeight = Math.max(0.75, rows.length * 0.17 + 0.25);
+        <!-- Gate information -->
+        <a-text value="${type}"
+          position="0 1.18 0"
+          align="center" color="${color}" width="3">
+        </a-text>
 
-  const description = lang === "en" ? info.descEn : info.desc;
-  const name = lang === "en" ? info.nameEn : info.nameAr;
+        <a-text value="${info.formula}"
+          position="0 -0.02 0"
+          align="center" color="#ffffff" width="2.8">
+        </a-text>
 
-  return `
-    <!-- 3D circuit base -->
-    <a-box position="0 -0.04 0"
-      width="2.8" height="0.08" depth="1.5"
-      color="#151b36"
-      material="metalness: 0.6; roughness: 0.3">
-    </a-box>
+        <a-text value="${name}"
+          position="0 -0.27 0"
+          align="center" color="${color}" width="3">
+        </a-text>
 
-    <!-- Decorative base lights -->
-    <a-box position="0 0.015 0.72"
-      width="2.5" height="0.025" depth="0.025"
-      color="${color}"
-      material="emissive: ${color}; emissiveIntensity: 0.7">
-    </a-box>
+        <a-text value="${desc}"
+          position="0 -0.48 0"
+          align="center" color="#d1d5e8" width="3.5">
+        </a-text>
 
-    ${inputA}
-    ${inputB}
-    ${chip}
-    ${output}
-
-    <!-- Gate name -->
-    <a-text value="${name}"
-      position="0 1.12 0" align="center"
-      color="#ffffff" width="3.8">
-    </a-text>
-
-    <!-- Truth table board -->
-    <a-box position="0 -0.08 -0.95"
-      width="1.7" height="${tableHeight}" depth="0.06"
-      color="#11182f" material="roughness: 0.35">
-    </a-box>
-
-    <a-text value="${isNot ? "A   Y" : "A   B   Y"}"
-      position="0 ${0.16 - rows.length * 0.085} -0.91"
-      align="center" color="${color}" width="2.5">
-    </a-text>
-
-    ${tableRows}
-
-    <!-- Learning description -->
-    <a-text value="${description}"
-      position="0 -0.55 0.05"
-      align="center" color="#ffffff" width="3.4">
-    </a-text>
-  `;
-}
+        <!-- Base -->
+        <a-box position="0 -0.65 0"
+          width="2.8" height="0.05" depth="0.9"
+          color="#151b36">
+        </a-box>
+      `;
+    }
 
     function stopAR() {
       const container = document.getElementById('arSceneContainer');
