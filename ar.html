@@ -146,7 +146,8 @@
           data-i18n="btn_close"></button>
       </div>
     </div>
-    <footer class="footer" id="footer">
+
+    <footer class="footer">
       <div class="footer__brand">Logic<span
           class="text-gradient">AR</span></div>
       <p data-i18n="footer_desc">LogicAR — وسيلة تعليمية لتدريس البوابات
@@ -159,6 +160,7 @@
       <p class="footer__copy" data-i18n="footer_copy">مشروع تعليمي جامعي ©
         ٢٠٢٦</p>
     </footer>
+
     <script>
     let selectedGate = 'AND';
     let arActive = false;
@@ -319,7 +321,7 @@
           <a-entity camera></a-entity>
         </a-scene>
       `;
-      document.getElementById('footer').style.display = 'none';
+
       document.getElementById('arInstructions').style.display = 'none';
       document.getElementById('arView').classList.add('active');
       arActive = true;
@@ -410,6 +412,11 @@
           position="0 -0.48 0"
           align="center" color="#d1d5e8" width="3.5">
         </a-text>
+
+        <!-- Base -->
+        <a-box position="0 -0.65 0"
+          width="3" height="0.05" depth="0.9">
+        </a-box>
       `;
     }
 
