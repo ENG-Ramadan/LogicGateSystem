@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LogicAR - Markerless Test</title>
+
+  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #status {
+      color: white;
+      background: #16213A;
+      padding: 12px;
+      margin: 10px auto;
+      width: fit-content;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="overlay">
+    <p id="status">Ready to start AR</p>
+  </div>
+
+  <a-scene
+    webxr="
+      requiredFeatures: hit-test;
+      optionalFeatures: dom-overlay;
+      overlayElement: #overlay;
+    "
+    ar-hit-test="target: #gate"
+    renderer="alpha: true; colorManagement: true"
+    vr-mode-ui="enabled: true"
+  >
+
+    <a-camera></a-camera>
+
+    <a-entity
+      light="type: ambient; intensity: 1"
+    ></a-entity>
+
+    <a-entity
+      light="type: directional; intensity: 1"
+      position="1 3 2"
+    ></a-entity>
+
+    <a-entity id="gate" visible="false">
+
+      <a-box
+        width="0.3"
+        height="0.15"
+        depth="0.08"
+        color="#00D4FF"
+        metalness="0.3"
+        roughness="0.3"
+      ></a-box>
+
+      <a-text
+        value="AND GATE"
+        align="center"
+        color="white"
+        position="0 0.18 0"
+        scale="0.25 0.25 0.25"
+      ></a-text>
+
+    </a-entity>
+
+  </a-scene>
+
+  <script>
+    const scene = document.querySelector("a-scene");
+    const status = document.getElementById("status");
+
+    if (!navigator.xr) {
+      status.textContent = "WebXR is not supported!";
+    } else {
+      navigator.xr.isSessionSupported("immersive-ar")
+        .then(supported => {
+          status.textContent = supported
+            ? "AR is supported - Click Enter AR"
+            : "AR is not supported on this device";
+        })
+        .catch(() => {
+          status.textContent = "Could not check AR support";
+        });
+    }
+
+    scene.addEventListener("enter-vr", () => {
+      status.textContent = "AR Started - Move your phone";
+    });
+
+    scene.addEventListener("exit-vr", () => {
+      status.textContent = "AR Stopped";
+    });
+
+    scene.addEventListener("ar-hit-test-achieved", () => {
+      status.textContent = "Surface detected! Tap to place the gate";
+    });
+
+    scene.addEventListener("ar-hit-test-select", () => {
+      status.textContent = "Gate placed successfully!";
+    });
+  </script>
+
+</body>
+</html>
