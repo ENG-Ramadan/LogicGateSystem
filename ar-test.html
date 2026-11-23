@@ -49,11 +49,7 @@
     overlayElement: #overlay;
   "
   xr-mode-ui="XRMode: ar"
-  renderer="
-    alpha: true;
-    colorManagement: true;
-    antialias: true;
-  "
+  renderer="alpha: true; colorManagement: true"
   ar-hit-test="target: #gate"
 >
 
@@ -99,54 +95,31 @@
 
   <script>
 
-    const scene = document.querySelector("a-scene");
-    const status = document.getElementById("status");
-    
-    scene.addEventListener("enter-vr", () => {
 
-    const session = scene.renderer.xr.getSession();
+const scene = document.querySelector("a-scene");
+const status = document.getElementById("status");
 
-    console.log("AR Session Started");
-    console.log(
-        "Environment Blend Mode:",
-        session.environmentBlendMode
-    );
+scene.addEventListener("enter-vr", () => {
+  status.textContent = "AR Started - Scan a surface";
+});
 
-    console.log(
-        "Reference Space:",
-        session.visibilityState
-    );
+scene.addEventListener("ar-hit-test-start", () => {
+  status.textContent = "Scanning surfaces...";
+});
 
-    });
-    // AR Started
-    scene.addEventListener("enter-vr", () => {
-      status.textContent =
-        "AR Started - Move your phone to scan surfaces";
-    });
+scene.addEventListener("ar-hit-test-achieved", () => {
+  status.textContent = "Surface detected! Tap to place AND Gate";
+});
 
-    // Hit Test Started
-    scene.addEventListener("ar-hit-test-start", () => {
-      status.textContent =
-        "Scanning... Move your phone slowly";
-    });
+scene.addEventListener("ar-hit-test-select", (event) => {
+  console.log("Selected surface:", event.detail);
 
-    // Surface Found
-    scene.addEventListener("ar-hit-test-achieved", () => {
-      status.textContent =
-        "Surface detected! Tap to place AND Gate";
-    });
+  status.textContent = "AND Gate placed!";
+});
 
-    // Object Placed
-    scene.addEventListener("ar-hit-test-select", () => {
-      status.textContent =
-        "AND Gate placed successfully!";
-    });
-
-    // AR Ended
-    scene.addEventListener("exit-vr", () => {
-      status.textContent =
-        "AR Session Ended";
-    });
+scene.addEventListener("exit-vr", () => {
+  status.textContent = "AR Session Ended";
+});
 
   </script>
 
