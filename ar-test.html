@@ -42,16 +42,20 @@
     <p id="status">LogicAR - Ready</p>
   </div>
 
-  <a-scene
-    webxr="
-      requiredFeatures: hit-test;
-      optionalFeatures: dom-overlay;
-      overlayElement: #overlay;
-    "
-    xr-mode-ui="XRMode: ar"
-    ar-hit-test="target: #gate"
-    renderer="colorManagement: true"
-  >
+
+<a-scene
+  webxr="
+    optionalFeatures: hit-test, dom-overlay;
+    overlayElement: #overlay;
+  "
+  xr-mode-ui="XRMode: ar"
+  renderer="
+    alpha: true;
+    colorManagement: true;
+    antialias: true;
+  "
+  ar-hit-test="target: #gate"
+>
 
     <!-- Camera -->
     <a-camera></a-camera>
@@ -97,7 +101,23 @@
 
     const scene = document.querySelector("a-scene");
     const status = document.getElementById("status");
+    
+    scene.addEventListener("enter-vr", () => {
 
+    const session = scene.renderer.xr.getSession();
+
+    console.log("AR Session Started");
+    console.log(
+        "Environment Blend Mode:",
+        session.environmentBlendMode
+    );
+
+    console.log(
+        "Reference Space:",
+        session.visibilityState
+    );
+
+    });
     // AR Started
     scene.addEventListener("enter-vr", () => {
       status.textContent =
