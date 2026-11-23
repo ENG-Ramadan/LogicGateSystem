@@ -15,15 +15,22 @@
       font-family: Arial, sans-serif;
     }
 
-    #overlay {
-      position: fixed;
-      top: 15px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      z-index: 10;
-      pointer-events: none;
-    }
+#overlay {
+  pointer-events: none;
+}
+
+#startAR {
+  pointer-events: auto;
+  position: relative;
+  z-index: 100;
+  padding: 14px 25px;
+  background: #00D4FF;
+  color: #16213A;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
 
     #status {
       color: white;
@@ -40,6 +47,7 @@
 
   <div id="overlay">
     <p id="status">Ready to start AR</p>
+    <button id="startAR">Enter AR</button>
   </div>
 
 <a-scene
@@ -53,38 +61,51 @@
 >
 
   <script>
-    const scene = document.querySelector("a-scene");
-    const status = document.getElementById("status");
+
+const scene = document.querySelector("a-scene");
+const status = document.getElementById("status");
+const startButton = document.getElementById("startAR");
+
+startButton.addEventListener("click", async () => {
+  try {
+    status.textContent = "Starting AR...";
 
     if (!navigator.xr) {
-      status.textContent = "WebXR is not supported!";
-    } else {
-      navigator.xr.isSessionSupported("immersive-ar")
-        .then(supported => {
-          status.textContent = supported
-            ? "AR is supported - Click Enter AR"
-            : "AR is not supported on this device";
-        })
-        .catch(() => {
-          status.textContent = "Could not check AR support";
-        });
+      throw new Error("WebXR is unavailable");
     }
 
-    scene.addEventListener("enter-vr", () => {
-      status.textContent = "AR Started - Move your phone";
-    });
+    const supported =
+      await navigator.xr.isSessionSupported("immersive-ar");
 
-    scene.addEventListener("exit-vr", () => {
+    if (!supported) {
+      throw new Error("AR is not supported");
+    }
+
+    const session = await navigator.xr.requestSession(
+      "immersive-ar",
+      {
+        requiredFeatures: ["hit-test"],
+        optionalFeatures: ["dom-overlay"],
+        domOverlay: {
+          root: document.getElementById("overlay")
+        }
+      }
+    );
+
+    await scene.renderer.xr.setSession(session);
+
+    status.textContent = "AR Started! Move your phone.";
+
+    session.addEventListener("end", () => {
       status.textContent = "AR Stopped";
     });
 
-    scene.addEventListener("ar-hit-test-achieved", () => {
-      status.textContent = "Surface detected! Tap to place the gate";
-    });
+  } catch (error) {
+    console.error("AR Error:", error);
+    status.textContent = error.name + ": " + error.message;
+  }
+});
 
-    scene.addEventListener("ar-hit-test-select", () => {
-      status.textContent = "Gate placed successfully!";
-    });
   </script>
 
 </body>
