@@ -5,53 +5,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>LogicAR - AR Test</title>
+  <title>LogicAR - Surface Detection</title>
 
   <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
   <style>
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
     }
 
-    #info {
+    #overlay {
       position: fixed;
       top: 15px;
       left: 0;
       right: 0;
       text-align: center;
       z-index: 10;
-      color: white;
-      font-family: Arial;
       pointer-events: none;
     }
 
-    #info p {
-      background: #16213A;
+    #status {
       display: inline-block;
+      background: #16213A;
+      color: white;
       padding: 12px 18px;
-      border-radius: 8px;
+      border-radius: 10px;
+      font-size: 15px;
     }
   </style>
 </head>
 
 <body>
 
-  <div id="info">
-    <p>LogicAR - Markerless Test</p>
+  <div id="overlay">
+    <p id="status">LogicAR - Ready</p>
   </div>
 
   <a-scene
-    xr-mode-ui="XRMode: xr"
     webxr="
-      optionalFeatures: hit-test, dom-overlay;
-      overlayElement: #info;
+      requiredFeatures: hit-test;
+      optionalFeatures: dom-overlay;
+      overlayElement: #overlay;
     "
+    xr-mode-ui="XRMode: ar"
+    ar-hit-test="target: #gate"
     renderer="colorManagement: true"
   >
 
-    <a-camera fov="70"></a-camera>
+    <!-- Camera -->
+    <a-camera></a-camera>
 
+    <!-- Lighting -->
     <a-entity
       light="type: ambient; intensity: 1"
     ></a-entity>
@@ -61,35 +66,69 @@
       position="1 3 2"
     ></a-entity>
 
-    <a-box
-      position="0 1.2 -1.5"
-      width="0.3"
-      height="0.3"
-      depth="0.3"
-      color="#00D4FF"
-      hide-on-enter-ar
-    ></a-box>
+    <!-- AND Gate -->
+    <a-entity id="gate" visible="false">
 
-    <a-sphere
-      position="0 0.3 -1.5"
-      radius="0.1"
-      color="#00FF88"
-    ></a-sphere>
+      <!-- Gate Body -->
+      <a-box
+        position="0 0.075 0"
+        width="0.30"
+        height="0.15"
+        depth="0.08"
+        color="#00D4FF"
+        metalness="0.3"
+        roughness="0.35"
+      ></a-box>
+
+      <!-- Gate Label -->
+      <a-text
+        value="AND GATE"
+        align="center"
+        color="#FFFFFF"
+        position="0 0.17 0"
+        scale="0.22 0.22 0.22"
+      ></a-text>
+
+    </a-entity>
 
   </a-scene>
-<script>
+
+  <script>
+
     const scene = document.querySelector("a-scene");
+    const status = document.getElementById("status");
 
-scene.addEventListener("enter-vr", () => {
-  console.log("AR Session Started");
-});
+    // AR Started
+    scene.addEventListener("enter-vr", () => {
+      status.textContent =
+        "AR Started - Move your phone to scan surfaces";
+    });
 
-scene.addEventListener("exit-vr", () => {
-  console.log("AR Session Ended");
+    // Hit Test Started
+    scene.addEventListener("ar-hit-test-start", () => {
+      status.textContent =
+        "Scanning... Move your phone slowly";
+    });
 
-  document.getElementById("info").innerHTML =
-    "<p>AR Session Ended</p>";
-});
-</script>
+    // Surface Found
+    scene.addEventListener("ar-hit-test-achieved", () => {
+      status.textContent =
+        "Surface detected! Tap to place AND Gate";
+    });
+
+    // Object Placed
+    scene.addEventListener("ar-hit-test-select", () => {
+      status.textContent =
+        "AND Gate placed successfully!";
+    });
+
+    // AR Ended
+    scene.addEventListener("exit-vr", () => {
+      status.textContent =
+        "AR Session Ended";
+    });
+
+  </script>
+
 </body>
 </html>
