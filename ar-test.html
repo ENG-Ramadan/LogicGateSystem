@@ -77,6 +77,19 @@
     ></a-sphere>
 
   </a-scene>
+<script>
+    const scene = document.querySelector("a-scene");
 
+scene.addEventListener("enter-vr", () => {
+  console.log("AR Session Started");
+});
+
+scene.addEventListener("exit-vr", () => {
+  console.log("AR Session Ended");
+
+  document.getElementById("info").innerHTML =
+    "<p>AR Session Ended</p>";
+});
+</script>
 </body>
 </html>
