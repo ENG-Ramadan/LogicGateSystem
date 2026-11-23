@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>LogicAR - AR Test</title>
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    #info {
+      position: fixed;
+      top: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 10;
+      color: white;
+      font-family: Arial;
+      pointer-events: none;
+    }
+
+    #info p {
+      background: #16213A;
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="info">
+    <p>LogicAR - Markerless Test</p>
+  </div>
+
+  <a-scene
+    xr-mode-ui="XRMode: xr"
+    webxr="
+      optionalFeatures: hit-test, dom-overlay;
+      overlayElement: #info;
+    "
+    renderer="colorManagement: true"
+  >
+
+    <a-camera fov="70"></a-camera>
+
+    <a-entity
+      light="type: ambient; intensity: 1"
+    ></a-entity>
+
+    <a-entity
+      light="type: directional; intensity: 1"
+      position="1 3 2"
+    ></a-entity>
+
+    <a-box
+      position="0 1.2 -1.5"
+      width="0.3"
+      height="0.3"
+      depth="0.3"
+      color="#00D4FF"
+      hide-on-enter-ar
+    ></a-box>
+
+    <a-sphere
+      position="0 0.3 -1.5"
+      radius="0.1"
+      color="#00FF88"
+    ></a-sphere>
+
+  </a-scene>
+
+</body>
+</html>
