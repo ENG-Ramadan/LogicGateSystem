@@ -70,6 +70,19 @@ startButton.addEventListener("click", async () => {
   try {
     status.textContent = "Starting AR...";
 
+    await scene.enterVR();
+
+    status.textContent = "AR Started!";
+  } catch (error) {
+    console.error("AR Error:", error);
+
+    status.textContent =
+      error.name + ": " + error.message;
+  }
+});
+  try {
+    status.textContent = "Starting AR...";
+
     if (!navigator.xr) {
       throw new Error("WebXR is unavailable");
     }
